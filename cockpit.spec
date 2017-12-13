@@ -4,7 +4,7 @@
 #
 Name     : cockpit
 Version  : 157
-Release  : 1
+Release  : 2
 URL      : https://github.com/cockpit-project/cockpit/releases/download/157/cockpit-157.tar.xz
 Source0  : https://github.com/cockpit-project/cockpit/releases/download/157/cockpit-157.tar.xz
 Summary  : Empty Cockpit Machines
@@ -97,19 +97,19 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1513188361
+export SOURCE_DATE_EPOCH=1513189214
 %configure --disable-static --disable-pcp
 make V=1  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1513188361
+export SOURCE_DATE_EPOCH=1513189214
 rm -rf %{buildroot}
 %make_install
 %find_lang cockpit
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/firewalld/services/cockpit.xml
+%exclude /usr/lib/firewalld/services/cockpit.xml
 
 %files bin
 %defattr(-,root,root,-)
