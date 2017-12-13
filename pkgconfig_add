@@ -1,0 +1,8 @@
+# This file contains additional pkgconfig build requirements that did
+# not get picked up automatically. One name per line, no whitespace.
+gio-2.0
+json-glib-1.0
+libssh
+libssh_threads
+polkit-agent-1
+systemd
