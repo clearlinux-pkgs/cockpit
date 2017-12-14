@@ -4,7 +4,7 @@
 #
 Name     : cockpit
 Version  : 157
-Release  : 2
+Release  : 3
 URL      : https://github.com/cockpit-project/cockpit/releases/download/157/cockpit-157.tar.xz
 Source0  : https://github.com/cockpit-project/cockpit/releases/download/157/cockpit-157.tar.xz
 Summary  : Empty Cockpit Machines
@@ -16,6 +16,7 @@ Requires: cockpit-lib
 Requires: cockpit-data
 Requires: cockpit-doc
 Requires: cockpit-locales
+Requires: glib-networking
 BuildRequires : Linux-PAM-dev
 BuildRequires : docbook-xml
 BuildRequires : e2fsprogs-dev
@@ -97,12 +98,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1513189214
+export SOURCE_DATE_EPOCH=1513293791
 %configure --disable-static --disable-pcp
-make V=1  %{?_smp_mflags}
+make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1513189214
+export SOURCE_DATE_EPOCH=1513293791
 rm -rf %{buildroot}
 %make_install
 %find_lang cockpit
