@@ -1,0 +1,11 @@
+rm -fr %{buildroot}/usr/share/cockpit/apps
+rm -fr %{buildroot}/usr/share/cockpit/dump
+rm -fr %{buildroot}/usr/share/cockpit/ostree
+rm -fr %{buildroot}/usr/share/cockpit/ovirt
+rm -fr %{buildroot}/usr/share/cockpit/packagekit
+rm -fr %{buildroot}/usr/share/cockpit/pcp
+rm -fr %{buildroot}/usr/share/cockpit/playground
+rm -fr %{buildroot}/usr/share/cockpit/selinux
+rm -fr %{buildroot}/usr/share/cockpit/subscriptions
+rm -fr %{buildroot}/usr/share/cockpit/subscriptions
+install -m 0644 -D cockpit.conf %{buildroot}/usr/lib/tmpfiles.d/cockpit.conf

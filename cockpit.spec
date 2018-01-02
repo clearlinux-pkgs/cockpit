@@ -4,7 +4,7 @@
 #
 Name     : cockpit
 Version  : 158
-Release  : 4
+Release  : 5
 URL      : https://github.com/cockpit-project/cockpit/releases/download/158/cockpit-158.tar.xz
 Source0  : https://github.com/cockpit-project/cockpit/releases/download/158/cockpit-158.tar.xz
 Summary  : Empty Cockpit Machines
@@ -35,6 +35,7 @@ BuildRequires : pkgconfig(polkit-agent-1)
 BuildRequires : pkgconfig(systemd)
 BuildRequires : util-linux
 BuildRequires : xmlto
+Patch1: 0001-Add-cockpit-tmpfile-configuration.patch
 
 %description
 Empty cockpit-machines RPM
@@ -92,21 +93,35 @@ locales components for the cockpit package.
 
 %prep
 %setup -q -n cockpit-158
+%patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1513873637
+export SOURCE_DATE_EPOCH=1514929332
 %configure --disable-static --disable-pcp
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1513873637
+export SOURCE_DATE_EPOCH=1514929332
 rm -rf %{buildroot}
 %make_install
 %find_lang cockpit
+## make_install_append content
+rm -fr %{buildroot}/usr/share/cockpit/apps
+rm -fr %{buildroot}/usr/share/cockpit/dump
+rm -fr %{buildroot}/usr/share/cockpit/ostree
+rm -fr %{buildroot}/usr/share/cockpit/ovirt
+rm -fr %{buildroot}/usr/share/cockpit/packagekit
+rm -fr %{buildroot}/usr/share/cockpit/pcp
+rm -fr %{buildroot}/usr/share/cockpit/playground
+rm -fr %{buildroot}/usr/share/cockpit/selinux
+rm -fr %{buildroot}/usr/share/cockpit/subscriptions
+rm -fr %{buildroot}/usr/share/cockpit/subscriptions
+install -m 0644 -D cockpit.conf %{buildroot}/usr/lib/tmpfiles.d/cockpit.conf
+## make_install_append end
 
 %files
 %defattr(-,root,root,-)
@@ -129,36 +144,11 @@ rm -rf %{buildroot}
 /usr/lib/systemd/system/cockpit.service
 /usr/lib/systemd/system/cockpit.socket
 /usr/lib/tmpfiles.d/cockpit-tempfiles.conf
+/usr/lib/tmpfiles.d/cockpit.conf
 
 %files data
 %defattr(-,root,root,-)
 /usr/share/applications/cockpit.desktop
-/usr/share/cockpit/apps/apps.css.gz
-/usr/share/cockpit/apps/apps.min.js.gz
-/usr/share/cockpit/apps/default.png
-/usr/share/cockpit/apps/index.html.gz
-/usr/share/cockpit/apps/manifest.json
-/usr/share/cockpit/apps/po.ca.js.gz
-/usr/share/cockpit/apps/po.cs.js.gz
-/usr/share/cockpit/apps/po.da.js.gz
-/usr/share/cockpit/apps/po.de.js.gz
-/usr/share/cockpit/apps/po.es.js.gz
-/usr/share/cockpit/apps/po.fi.js.gz
-/usr/share/cockpit/apps/po.fr.js.gz
-/usr/share/cockpit/apps/po.hr.js.gz
-/usr/share/cockpit/apps/po.hu.js.gz
-/usr/share/cockpit/apps/po.ja.js.gz
-/usr/share/cockpit/apps/po.js.gz
-/usr/share/cockpit/apps/po.ko.js.gz
-/usr/share/cockpit/apps/po.my.js.gz
-/usr/share/cockpit/apps/po.nl.js.gz
-/usr/share/cockpit/apps/po.pa.js.gz
-/usr/share/cockpit/apps/po.pl.js.gz
-/usr/share/cockpit/apps/po.pt.js.gz
-/usr/share/cockpit/apps/po.pt_BR.js.gz
-/usr/share/cockpit/apps/po.tr.js.gz
-/usr/share/cockpit/apps/po.uk.js.gz
-/usr/share/cockpit/apps/po.zh_CN.js.gz
 /usr/share/cockpit/base1/bundle.min.js.gz
 /usr/share/cockpit/base1/cockpit.min.css.gz
 /usr/share/cockpit/base1/cockpit.min.js.gz
@@ -360,154 +350,6 @@ rm -rf %{buildroot}
 /usr/share/cockpit/networkmanager/po.tr.js.gz
 /usr/share/cockpit/networkmanager/po.uk.js.gz
 /usr/share/cockpit/networkmanager/po.zh_CN.js.gz
-/usr/share/cockpit/ostree/index.html.gz
-/usr/share/cockpit/ostree/manifest.json
-/usr/share/cockpit/ostree/ostree.css.gz
-/usr/share/cockpit/ostree/ostree.min.js.gz
-/usr/share/cockpit/ostree/po.ca.js.gz
-/usr/share/cockpit/ostree/po.cs.js.gz
-/usr/share/cockpit/ostree/po.da.js.gz
-/usr/share/cockpit/ostree/po.de.js.gz
-/usr/share/cockpit/ostree/po.es.js.gz
-/usr/share/cockpit/ostree/po.fi.js.gz
-/usr/share/cockpit/ostree/po.fr.js.gz
-/usr/share/cockpit/ostree/po.hr.js.gz
-/usr/share/cockpit/ostree/po.hu.js.gz
-/usr/share/cockpit/ostree/po.ja.js.gz
-/usr/share/cockpit/ostree/po.js.gz
-/usr/share/cockpit/ostree/po.ko.js.gz
-/usr/share/cockpit/ostree/po.my.js.gz
-/usr/share/cockpit/ostree/po.nl.js.gz
-/usr/share/cockpit/ostree/po.pa.js.gz
-/usr/share/cockpit/ostree/po.pl.js.gz
-/usr/share/cockpit/ostree/po.pt.js.gz
-/usr/share/cockpit/ostree/po.pt_BR.js.gz
-/usr/share/cockpit/ostree/po.tr.js.gz
-/usr/share/cockpit/ostree/po.uk.js.gz
-/usr/share/cockpit/ostree/po.zh_CN.js.gz
-/usr/share/cockpit/ovirt/base.css
-/usr/share/cockpit/ovirt/index.html.gz
-/usr/share/cockpit/ovirt/install.sh
-/usr/share/cockpit/ovirt/manifest.json
-/usr/share/cockpit/ovirt/ovirt.css.gz
-/usr/share/cockpit/ovirt/ovirt.min.js.gz
-/usr/share/cockpit/ovirt/po.ca.js.gz
-/usr/share/cockpit/ovirt/po.cs.js.gz
-/usr/share/cockpit/ovirt/po.da.js.gz
-/usr/share/cockpit/ovirt/po.de.js.gz
-/usr/share/cockpit/ovirt/po.es.js.gz
-/usr/share/cockpit/ovirt/po.fi.js.gz
-/usr/share/cockpit/ovirt/po.fr.js.gz
-/usr/share/cockpit/ovirt/po.hr.js.gz
-/usr/share/cockpit/ovirt/po.hu.js.gz
-/usr/share/cockpit/ovirt/po.ja.js.gz
-/usr/share/cockpit/ovirt/po.js.gz
-/usr/share/cockpit/ovirt/po.ko.js.gz
-/usr/share/cockpit/ovirt/po.my.js.gz
-/usr/share/cockpit/ovirt/po.nl.js.gz
-/usr/share/cockpit/ovirt/po.pa.js.gz
-/usr/share/cockpit/ovirt/po.pl.js.gz
-/usr/share/cockpit/ovirt/po.pt.js.gz
-/usr/share/cockpit/ovirt/po.pt_BR.js.gz
-/usr/share/cockpit/ovirt/po.tr.js.gz
-/usr/share/cockpit/ovirt/po.uk.js.gz
-/usr/share/cockpit/ovirt/po.zh_CN.js.gz
-/usr/share/cockpit/ovirt/vnc.css.gz
-/usr/share/cockpit/ovirt/vnc.html.gz
-/usr/share/cockpit/ovirt/vnc.min.js.gz
-/usr/share/cockpit/packagekit/index.html.gz
-/usr/share/cockpit/packagekit/manifest.json
-/usr/share/cockpit/packagekit/po.ca.js.gz
-/usr/share/cockpit/packagekit/po.cs.js.gz
-/usr/share/cockpit/packagekit/po.da.js.gz
-/usr/share/cockpit/packagekit/po.de.js.gz
-/usr/share/cockpit/packagekit/po.es.js.gz
-/usr/share/cockpit/packagekit/po.fi.js.gz
-/usr/share/cockpit/packagekit/po.fr.js.gz
-/usr/share/cockpit/packagekit/po.hr.js.gz
-/usr/share/cockpit/packagekit/po.hu.js.gz
-/usr/share/cockpit/packagekit/po.ja.js.gz
-/usr/share/cockpit/packagekit/po.js.gz
-/usr/share/cockpit/packagekit/po.ko.js.gz
-/usr/share/cockpit/packagekit/po.my.js.gz
-/usr/share/cockpit/packagekit/po.nl.js.gz
-/usr/share/cockpit/packagekit/po.pa.js.gz
-/usr/share/cockpit/packagekit/po.pl.js.gz
-/usr/share/cockpit/packagekit/po.pt.js.gz
-/usr/share/cockpit/packagekit/po.pt_BR.js.gz
-/usr/share/cockpit/packagekit/po.tr.js.gz
-/usr/share/cockpit/packagekit/po.uk.js.gz
-/usr/share/cockpit/packagekit/po.zh_CN.js.gz
-/usr/share/cockpit/packagekit/updates.css.gz
-/usr/share/cockpit/packagekit/updates.min.js.gz
-/usr/share/cockpit/pcp/manifest.json
-/usr/share/cockpit/pcp/po.ca.js.gz
-/usr/share/cockpit/pcp/po.cs.js.gz
-/usr/share/cockpit/pcp/po.da.js.gz
-/usr/share/cockpit/pcp/po.de.js.gz
-/usr/share/cockpit/pcp/po.es.js.gz
-/usr/share/cockpit/pcp/po.fi.js.gz
-/usr/share/cockpit/pcp/po.fr.js.gz
-/usr/share/cockpit/pcp/po.hr.js.gz
-/usr/share/cockpit/pcp/po.hu.js.gz
-/usr/share/cockpit/pcp/po.ja.js.gz
-/usr/share/cockpit/pcp/po.js.gz
-/usr/share/cockpit/pcp/po.ko.js.gz
-/usr/share/cockpit/pcp/po.my.js.gz
-/usr/share/cockpit/pcp/po.nl.js.gz
-/usr/share/cockpit/pcp/po.pa.js.gz
-/usr/share/cockpit/pcp/po.pl.js.gz
-/usr/share/cockpit/pcp/po.pt.js.gz
-/usr/share/cockpit/pcp/po.pt_BR.js.gz
-/usr/share/cockpit/pcp/po.tr.js.gz
-/usr/share/cockpit/pcp/po.uk.js.gz
-/usr/share/cockpit/pcp/po.zh_CN.js.gz
-/usr/share/cockpit/playground/hammer.gif
-/usr/share/cockpit/playground/jquery-patterns.css.gz
-/usr/share/cockpit/playground/jquery-patterns.html.gz
-/usr/share/cockpit/playground/jquery-patterns.min.js.gz
-/usr/share/cockpit/playground/manifest.json
-/usr/share/cockpit/playground/metrics.css.gz
-/usr/share/cockpit/playground/metrics.html.gz
-/usr/share/cockpit/playground/metrics.min.js.gz
-/usr/share/cockpit/playground/pkgs.html.gz
-/usr/share/cockpit/playground/pkgs.min.js.gz
-/usr/share/cockpit/playground/plot.css.gz
-/usr/share/cockpit/playground/plot.html.gz
-/usr/share/cockpit/playground/plot.min.js.gz
-/usr/share/cockpit/playground/po.ca.js.gz
-/usr/share/cockpit/playground/po.cs.js.gz
-/usr/share/cockpit/playground/po.da.js.gz
-/usr/share/cockpit/playground/po.de.js.gz
-/usr/share/cockpit/playground/po.es.js.gz
-/usr/share/cockpit/playground/po.extra.de.js
-/usr/share/cockpit/playground/po.fi.js.gz
-/usr/share/cockpit/playground/po.fr.js.gz
-/usr/share/cockpit/playground/po.hr.js.gz
-/usr/share/cockpit/playground/po.hu.js.gz
-/usr/share/cockpit/playground/po.ja.js.gz
-/usr/share/cockpit/playground/po.js.gz
-/usr/share/cockpit/playground/po.ko.js.gz
-/usr/share/cockpit/playground/po.my.js.gz
-/usr/share/cockpit/playground/po.nl.js.gz
-/usr/share/cockpit/playground/po.pa.js.gz
-/usr/share/cockpit/playground/po.pl.js.gz
-/usr/share/cockpit/playground/po.pt.js.gz
-/usr/share/cockpit/playground/po.pt_BR.js.gz
-/usr/share/cockpit/playground/po.tr.js.gz
-/usr/share/cockpit/playground/po.uk.js.gz
-/usr/share/cockpit/playground/po.zh_CN.js.gz
-/usr/share/cockpit/playground/react-patterns.css.gz
-/usr/share/cockpit/playground/react-patterns.html.gz
-/usr/share/cockpit/playground/react-patterns.min.js.gz
-/usr/share/cockpit/playground/service.html.gz
-/usr/share/cockpit/playground/service.min.js.gz
-/usr/share/cockpit/playground/speed.html.gz
-/usr/share/cockpit/playground/speed.min.js.gz
-/usr/share/cockpit/playground/test.html.gz
-/usr/share/cockpit/playground/test.min.js.gz
-/usr/share/cockpit/playground/translate.html.gz
-/usr/share/cockpit/playground/translate.min.js.gz
 /usr/share/cockpit/realmd/domain.min.js.gz
 /usr/share/cockpit/realmd/manifest.json
 /usr/share/cockpit/realmd/po.ca.js.gz
@@ -531,31 +373,6 @@ rm -rf %{buildroot}
 /usr/share/cockpit/realmd/po.tr.js.gz
 /usr/share/cockpit/realmd/po.uk.js.gz
 /usr/share/cockpit/realmd/po.zh_CN.js.gz
-/usr/share/cockpit/selinux/manifest.json
-/usr/share/cockpit/selinux/po.ca.js.gz
-/usr/share/cockpit/selinux/po.cs.js.gz
-/usr/share/cockpit/selinux/po.da.js.gz
-/usr/share/cockpit/selinux/po.de.js.gz
-/usr/share/cockpit/selinux/po.es.js.gz
-/usr/share/cockpit/selinux/po.fi.js.gz
-/usr/share/cockpit/selinux/po.fr.js.gz
-/usr/share/cockpit/selinux/po.hr.js.gz
-/usr/share/cockpit/selinux/po.hu.js.gz
-/usr/share/cockpit/selinux/po.ja.js.gz
-/usr/share/cockpit/selinux/po.js.gz
-/usr/share/cockpit/selinux/po.ko.js.gz
-/usr/share/cockpit/selinux/po.my.js.gz
-/usr/share/cockpit/selinux/po.nl.js.gz
-/usr/share/cockpit/selinux/po.pa.js.gz
-/usr/share/cockpit/selinux/po.pl.js.gz
-/usr/share/cockpit/selinux/po.pt.js.gz
-/usr/share/cockpit/selinux/po.pt_BR.js.gz
-/usr/share/cockpit/selinux/po.tr.js.gz
-/usr/share/cockpit/selinux/po.uk.js.gz
-/usr/share/cockpit/selinux/po.zh_CN.js.gz
-/usr/share/cockpit/selinux/selinux.css.gz
-/usr/share/cockpit/selinux/selinux.min.js.gz
-/usr/share/cockpit/selinux/setroubleshoot.html.gz
 /usr/share/cockpit/shell/images/server-error.png
 /usr/share/cockpit/shell/images/server-large.png
 /usr/share/cockpit/shell/images/server-small.png
@@ -698,31 +515,6 @@ rm -rf %{buildroot}
 /usr/share/cockpit/storaged/po.zh_CN.js.gz
 /usr/share/cockpit/storaged/storage.css.gz
 /usr/share/cockpit/storaged/storage.min.js.gz
-/usr/share/cockpit/subscriptions/index.html.gz
-/usr/share/cockpit/subscriptions/manifest.json
-/usr/share/cockpit/subscriptions/po.ca.js.gz
-/usr/share/cockpit/subscriptions/po.cs.js.gz
-/usr/share/cockpit/subscriptions/po.da.js.gz
-/usr/share/cockpit/subscriptions/po.de.js.gz
-/usr/share/cockpit/subscriptions/po.es.js.gz
-/usr/share/cockpit/subscriptions/po.fi.js.gz
-/usr/share/cockpit/subscriptions/po.fr.js.gz
-/usr/share/cockpit/subscriptions/po.hr.js.gz
-/usr/share/cockpit/subscriptions/po.hu.js.gz
-/usr/share/cockpit/subscriptions/po.ja.js.gz
-/usr/share/cockpit/subscriptions/po.js.gz
-/usr/share/cockpit/subscriptions/po.ko.js.gz
-/usr/share/cockpit/subscriptions/po.my.js.gz
-/usr/share/cockpit/subscriptions/po.nl.js.gz
-/usr/share/cockpit/subscriptions/po.pa.js.gz
-/usr/share/cockpit/subscriptions/po.pl.js.gz
-/usr/share/cockpit/subscriptions/po.pt.js.gz
-/usr/share/cockpit/subscriptions/po.pt_BR.js.gz
-/usr/share/cockpit/subscriptions/po.tr.js.gz
-/usr/share/cockpit/subscriptions/po.uk.js.gz
-/usr/share/cockpit/subscriptions/po.zh_CN.js.gz
-/usr/share/cockpit/subscriptions/subscriptions.css.gz
-/usr/share/cockpit/subscriptions/subscriptions.min.js.gz
 /usr/share/cockpit/systemd/index.html.gz
 /usr/share/cockpit/systemd/logs.html.gz
 /usr/share/cockpit/systemd/logs.min.js.gz
