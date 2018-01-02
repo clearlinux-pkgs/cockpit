@@ -8,4 +8,3 @@ rm -fr %{buildroot}/usr/share/cockpit/playground
 rm -fr %{buildroot}/usr/share/cockpit/selinux
 rm -fr %{buildroot}/usr/share/cockpit/subscriptions
 rm -fr %{buildroot}/usr/share/cockpit/subscriptions
-install -m 0644 -D cockpit.conf %{buildroot}/usr/lib/tmpfiles.d/cockpit.conf

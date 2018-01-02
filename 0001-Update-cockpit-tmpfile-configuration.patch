@@ -1,0 +1,24 @@
+From 5e5b6063df0d61b279970c72fa12c7827d4f0bb3 Mon Sep 17 00:00:00 2001
+From: William Douglas <william.douglas@intel.com>
+Date: Tue, 2 Jan 2018 18:34:30 +0000
+Subject: [PATCH] Update cockpit tmpfile configuration
+
+Update systemd tmpfile for creation of /etc directories required by
+cockpit.
+---
+ src/ws/cockpit-tempfiles.conf.in | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/src/ws/cockpit-tempfiles.conf.in b/src/ws/cockpit-tempfiles.conf.in
+index fb6df5f..692cb8a 100644
+--- a/src/ws/cockpit-tempfiles.conf.in
++++ b/src/ws/cockpit-tempfiles.conf.in
+@@ -1,2 +1,5 @@
++d /etc/cockpit - root root - -
++d /etc/cockpit/machines.d - root root - -
++d /etc/cockpit/ws-certs.d - root root - -
+ d /run/cockpit 0755 - - -
+ L+ /run/cockpit/issue - - - - @datadir@/@PACKAGE@/issue/inactive.issue
+-- 
+2.15.1
+

@@ -4,7 +4,7 @@
 #
 Name     : cockpit
 Version  : 158
-Release  : 5
+Release  : 6
 URL      : https://github.com/cockpit-project/cockpit/releases/download/158/cockpit-158.tar.xz
 Source0  : https://github.com/cockpit-project/cockpit/releases/download/158/cockpit-158.tar.xz
 Summary  : Empty Cockpit Machines
@@ -35,7 +35,7 @@ BuildRequires : pkgconfig(polkit-agent-1)
 BuildRequires : pkgconfig(systemd)
 BuildRequires : util-linux
 BuildRequires : xmlto
-Patch1: 0001-Add-cockpit-tmpfile-configuration.patch
+Patch1: 0001-Update-cockpit-tmpfile-configuration.patch
 
 %description
 Empty cockpit-machines RPM
@@ -100,12 +100,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1514929332
+export SOURCE_DATE_EPOCH=1514929622
 %configure --disable-static --disable-pcp
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1514929332
+export SOURCE_DATE_EPOCH=1514929622
 rm -rf %{buildroot}
 %make_install
 %find_lang cockpit
@@ -120,7 +120,6 @@ rm -fr %{buildroot}/usr/share/cockpit/playground
 rm -fr %{buildroot}/usr/share/cockpit/selinux
 rm -fr %{buildroot}/usr/share/cockpit/subscriptions
 rm -fr %{buildroot}/usr/share/cockpit/subscriptions
-install -m 0644 -D cockpit.conf %{buildroot}/usr/lib/tmpfiles.d/cockpit.conf
 ## make_install_append end
 
 %files
@@ -144,7 +143,6 @@ install -m 0644 -D cockpit.conf %{buildroot}/usr/lib/tmpfiles.d/cockpit.conf
 /usr/lib/systemd/system/cockpit.service
 /usr/lib/systemd/system/cockpit.socket
 /usr/lib/tmpfiles.d/cockpit-tempfiles.conf
-/usr/lib/tmpfiles.d/cockpit.conf
 
 %files data
 %defattr(-,root,root,-)
