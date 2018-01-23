@@ -4,7 +4,7 @@
 #
 Name     : cockpit
 Version  : 159
-Release  : 7
+Release  : 8
 URL      : https://github.com/cockpit-project/cockpit/releases/download/159/cockpit-159.tar.xz
 Source0  : https://github.com/cockpit-project/cockpit/releases/download/159/cockpit-159.tar.xz
 Summary  : Empty Cockpit Machines
@@ -17,6 +17,7 @@ Requires: cockpit-data
 Requires: cockpit-doc
 Requires: cockpit-locales
 Requires: glib-networking
+Requires: polkit
 BuildRequires : Linux-PAM-dev
 BuildRequires : docbook-xml
 BuildRequires : e2fsprogs-dev
@@ -100,12 +101,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1515855992
+export SOURCE_DATE_EPOCH=1516737620
 %configure --disable-static --disable-pcp
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1515855992
+export SOURCE_DATE_EPOCH=1516737620
 rm -rf %{buildroot}
 %make_install
 %find_lang cockpit
