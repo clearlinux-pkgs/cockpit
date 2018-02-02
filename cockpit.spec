@@ -4,7 +4,7 @@
 #
 Name     : cockpit
 Version  : 159
-Release  : 8
+Release  : 9
 URL      : https://github.com/cockpit-project/cockpit/releases/download/159/cockpit-159.tar.xz
 Source0  : https://github.com/cockpit-project/cockpit/releases/download/159/cockpit-159.tar.xz
 Summary  : Empty Cockpit Machines
