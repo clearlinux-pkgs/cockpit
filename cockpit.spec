@@ -4,7 +4,7 @@
 #
 Name     : cockpit
 Version  : 165
-Release  : 13
+Release  : 14
 URL      : https://github.com/cockpit-project/cockpit/releases/download/165/cockpit-165.tar.xz
 Source0  : https://github.com/cockpit-project/cockpit/releases/download/165/cockpit-165.tar.xz
 Summary  : Empty Cockpit Machines
