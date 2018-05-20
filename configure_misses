@@ -1,9 +1,6 @@
 Configure miss: whether to install to prefix only
 Configure miss: ssh_get_server_publickey in -lssh
 Configure miss: whether to build with PCP
-Configure miss: chromium-browser
-Configure miss: chrome
-Configure miss: headless_shell
 Configure miss: whether /usr/bin/newusers understands --crypt-method
 Configure miss: asan flags
 Configure miss: whether to build with coverage
