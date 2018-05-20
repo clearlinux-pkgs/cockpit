@@ -4,18 +4,18 @@
 #
 Name     : cockpit
 Version  : 165
-Release  : 14
+Release  : 15
 URL      : https://github.com/cockpit-project/cockpit/releases/download/165/cockpit-165.tar.xz
 Source0  : https://github.com/cockpit-project/cockpit/releases/download/165/cockpit-165.tar.xz
 Summary  : Empty Cockpit Machines
 Group    : Development/Tools
-License  : Apache-2.0 BSD-3-Clause LGPL-2.1 LGPL-2.1+ MIT MPL-2.0
+License  : Apache-2.0 BSD-3-Clause GPL-2.0 LGPL-2.1 LGPL-2.1+ MIT MPL-2.0
 Requires: cockpit-bin
 Requires: cockpit-config
 Requires: cockpit-lib
 Requires: cockpit-data
-Requires: cockpit-doc
 Requires: cockpit-locales
+Requires: cockpit-man
 Requires: glib-networking
 Requires: polkit
 BuildRequires : Linux-PAM-dev
@@ -46,6 +46,7 @@ Summary: bin components for the cockpit package.
 Group: Binaries
 Requires: cockpit-data
 Requires: cockpit-config
+Requires: cockpit-man
 
 %description bin
 bin components for the cockpit package.
@@ -70,6 +71,7 @@ data components for the cockpit package.
 %package doc
 Summary: doc components for the cockpit package.
 Group: Documentation
+Requires: cockpit-man
 
 %description doc
 doc components for the cockpit package.
@@ -92,6 +94,14 @@ Group: Default
 locales components for the cockpit package.
 
 
+%package man
+Summary: man components for the cockpit package.
+Group: Default
+
+%description man
+man components for the cockpit package.
+
+
 %prep
 %setup -q -n cockpit-165
 %patch1 -p1
@@ -101,12 +111,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1522849231
+export SOURCE_DATE_EPOCH=1526828597
 %configure --disable-static --disable-pcp
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1522849231
+export SOURCE_DATE_EPOCH=1526828597
 rm -rf %{buildroot}
 %make_install
 %find_lang cockpit
@@ -621,13 +631,19 @@ rm -fr %{buildroot}/usr/share/cockpit/subscriptions
 %files doc
 %defattr(-,root,root,-)
 %doc /usr/share/doc/cockpit/*
-%doc /usr/share/man/man1/*
-%doc /usr/share/man/man5/*
-%doc /usr/share/man/man8/*
 
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/security/pam_ssh_add.so
+
+%files man
+%defattr(-,root,root,-)
+/usr/share/man/man1/cockpit-bridge.1
+/usr/share/man/man1/cockpit.1
+/usr/share/man/man5/cockpit.conf.5
+/usr/share/man/man8/cockpit-ws.8
+/usr/share/man/man8/pam_ssh_add.8
+/usr/share/man/man8/remotectl.8
 
 %files locales -f cockpit.lang
 %defattr(-,root,root,-)
