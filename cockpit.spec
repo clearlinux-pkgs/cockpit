@@ -4,19 +4,21 @@
 #
 Name     : cockpit
 Version  : 180
-Release  : 28
+Release  : 29
 URL      : https://github.com/cockpit-project/cockpit/releases/download/180/cockpit-180.tar.xz
 Source0  : https://github.com/cockpit-project/cockpit/releases/download/180/cockpit-180.tar.xz
 Summary  : A user interface for Linux servers
 Group    : Development/Tools
 License  : Apache-2.0 BSD-3-Clause LGPL-2.1 LGPL-2.1+ MIT
-Requires: cockpit-bin
-Requires: cockpit-config
-Requires: cockpit-lib
-Requires: cockpit-data
-Requires: cockpit-license
-Requires: cockpit-locales
-Requires: cockpit-man
+Requires: cockpit-bin = %{version}-%{release}
+Requires: cockpit-config = %{version}-%{release}
+Requires: cockpit-data = %{version}-%{release}
+Requires: cockpit-lib = %{version}-%{release}
+Requires: cockpit-libexec = %{version}-%{release}
+Requires: cockpit-license = %{version}-%{release}
+Requires: cockpit-locales = %{version}-%{release}
+Requires: cockpit-man = %{version}-%{release}
+Requires: cockpit-services = %{version}-%{release}
 Requires: glib-networking
 Requires: polkit
 BuildRequires : Linux-PAM-dev
@@ -34,7 +36,6 @@ BuildRequires : perl(XML::Parser)
 BuildRequires : pkgconfig(gio-2.0)
 BuildRequires : pkgconfig(json-glib-1.0)
 BuildRequires : pkgconfig(libssh)
-BuildRequires : pkgconfig(libssh_threads)
 BuildRequires : pkgconfig(libsystemd)
 BuildRequires : pkgconfig(polkit-agent-1)
 BuildRequires : pkgconfig(systemd)
@@ -53,9 +54,11 @@ Dummy package from building optional packages only; never install or publish me.
 Summary: bin components for the cockpit package.
 Group: Binaries
 Requires: cockpit-data = %{version}-%{release}
+Requires: cockpit-libexec = %{version}-%{release}
 Requires: cockpit-config = %{version}-%{release}
 Requires: cockpit-license = %{version}-%{release}
 Requires: cockpit-man = %{version}-%{release}
+Requires: cockpit-services = %{version}-%{release}
 
 %description bin
 bin components for the cockpit package.
@@ -90,10 +93,21 @@ doc components for the cockpit package.
 Summary: lib components for the cockpit package.
 Group: Libraries
 Requires: cockpit-data = %{version}-%{release}
+Requires: cockpit-libexec = %{version}-%{release}
 Requires: cockpit-license = %{version}-%{release}
 
 %description lib
 lib components for the cockpit package.
+
+
+%package libexec
+Summary: libexec components for the cockpit package.
+Group: Default
+Requires: cockpit-config = %{version}-%{release}
+Requires: cockpit-license = %{version}-%{release}
+
+%description libexec
+libexec components for the cockpit package.
 
 
 %package license
@@ -120,6 +134,14 @@ Group: Default
 man components for the cockpit package.
 
 
+%package services
+Summary: services components for the cockpit package.
+Group: Systemd services
+
+%description services
+services components for the cockpit package.
+
+
 %prep
 %setup -q -n cockpit-180
 %patch1 -p1
@@ -130,43 +152,45 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1539353474
+export SOURCE_DATE_EPOCH=1541004927
 %configure --disable-static --disable-pcp
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1539353474
+export SOURCE_DATE_EPOCH=1541004927
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/cockpit
-cp COPYING %{buildroot}/usr/share/doc/cockpit/COPYING
-cp node_modules/angular-bootstrap-npm/LICENSE %{buildroot}/usr/share/doc/cockpit/node_modules_angular-bootstrap-npm_LICENSE
-cp node_modules/angular-gettext/LICENSE %{buildroot}/usr/share/doc/cockpit/node_modules_angular-gettext_LICENSE
-cp node_modules/bootstrap-datepicker/LICENSE %{buildroot}/usr/share/doc/cockpit/node_modules_bootstrap-datepicker_LICENSE
-cp node_modules/bootstrap/LICENSE %{buildroot}/usr/share/doc/cockpit/node_modules_bootstrap_LICENSE
-cp node_modules/c3/LICENSE %{buildroot}/usr/share/doc/cockpit/node_modules_c3_LICENSE
-cp node_modules/create-react-class/LICENSE.txt %{buildroot}/usr/share/doc/cockpit/node_modules_create-react-class_LICENSE.txt
-cp node_modules/d3/LICENSE %{buildroot}/usr/share/doc/cockpit/node_modules_d3_LICENSE
-cp node_modules/jquery-flot/LICENSE.txt %{buildroot}/usr/share/doc/cockpit/node_modules_jquery-flot_LICENSE.txt
-cp node_modules/js-sha1/LICENSE.txt %{buildroot}/usr/share/doc/cockpit/node_modules_js-sha1_LICENSE.txt
-cp node_modules/json-stable-stringify-without-jsonify/LICENSE %{buildroot}/usr/share/doc/cockpit/node_modules_json-stable-stringify-without-jsonify_LICENSE
-cp node_modules/kubernetes-container-terminal/COPYING %{buildroot}/usr/share/doc/cockpit/node_modules_kubernetes-container-terminal_COPYING
-cp node_modules/kubernetes-topology-graph/COPYING %{buildroot}/usr/share/doc/cockpit/node_modules_kubernetes-topology-graph_COPYING
-cp node_modules/moment/LICENSE %{buildroot}/usr/share/doc/cockpit/node_modules_moment_LICENSE
-cp node_modules/mustache/LICENSE %{buildroot}/usr/share/doc/cockpit/node_modules_mustache_LICENSE
-cp node_modules/patternfly-react/LICENSE %{buildroot}/usr/share/doc/cockpit/node_modules_patternfly-react_LICENSE
-cp node_modules/patternfly/LICENSE.txt %{buildroot}/usr/share/doc/cockpit/node_modules_patternfly_LICENSE.txt
-cp node_modules/promise/LICENSE %{buildroot}/usr/share/doc/cockpit/node_modules_promise_LICENSE
-cp node_modules/prop-types/LICENSE %{buildroot}/usr/share/doc/cockpit/node_modules_prop-types_LICENSE
-cp node_modules/qunitjs/LICENSE.txt %{buildroot}/usr/share/doc/cockpit/node_modules_qunitjs_LICENSE.txt
-cp node_modules/react-bootstrap/LICENSE %{buildroot}/usr/share/doc/cockpit/node_modules_react-bootstrap_LICENSE
-cp node_modules/react-dom/LICENSE %{buildroot}/usr/share/doc/cockpit/node_modules_react-dom_LICENSE
-cp node_modules/react/LICENSE %{buildroot}/usr/share/doc/cockpit/node_modules_react_LICENSE
-cp node_modules/redux-thunk/LICENSE.md %{buildroot}/usr/share/doc/cockpit/node_modules_redux-thunk_LICENSE.md
-cp node_modules/redux/LICENSE.md %{buildroot}/usr/share/doc/cockpit/node_modules_redux_LICENSE.md
-cp node_modules/registry-image-widgets/COPYING %{buildroot}/usr/share/doc/cockpit/node_modules_registry-image-widgets_COPYING
-cp node_modules/term.js-cockpit/LICENSE %{buildroot}/usr/share/doc/cockpit/node_modules_term.js-cockpit_LICENSE
-cp src/bridge/mock-resource/system/cockpit/test-priority/sub/COPYING %{buildroot}/usr/share/doc/cockpit/src_bridge_mock-resource_system_cockpit_test-priority_sub_COPYING
-cp src/bridge/mock-resource/system/cockpit/test/sub/COPYING %{buildroot}/usr/share/doc/cockpit/src_bridge_mock-resource_system_cockpit_test_sub_COPYING
+mkdir -p %{buildroot}/usr/share/package-licenses/cockpit
+cp COPYING %{buildroot}/usr/share/package-licenses/cockpit/COPYING
+cp COPYING.node %{buildroot}/usr/share/package-licenses/cockpit/COPYING.node
+cp node_modules/angular-bootstrap-npm/LICENSE %{buildroot}/usr/share/package-licenses/cockpit/node_modules_angular-bootstrap-npm_LICENSE
+cp node_modules/angular-gettext/LICENSE %{buildroot}/usr/share/package-licenses/cockpit/node_modules_angular-gettext_LICENSE
+cp node_modules/bootstrap-datepicker/LICENSE %{buildroot}/usr/share/package-licenses/cockpit/node_modules_bootstrap-datepicker_LICENSE
+cp node_modules/bootstrap/LICENSE %{buildroot}/usr/share/package-licenses/cockpit/node_modules_bootstrap_LICENSE
+cp node_modules/c3/LICENSE %{buildroot}/usr/share/package-licenses/cockpit/node_modules_c3_LICENSE
+cp node_modules/create-react-class/LICENSE.txt %{buildroot}/usr/share/package-licenses/cockpit/node_modules_create-react-class_LICENSE.txt
+cp node_modules/d3/LICENSE %{buildroot}/usr/share/package-licenses/cockpit/node_modules_d3_LICENSE
+cp node_modules/jquery-flot/LICENSE.txt %{buildroot}/usr/share/package-licenses/cockpit/node_modules_jquery-flot_LICENSE.txt
+cp node_modules/js-sha1/LICENSE.txt %{buildroot}/usr/share/package-licenses/cockpit/node_modules_js-sha1_LICENSE.txt
+cp node_modules/json-stable-stringify-without-jsonify/LICENSE %{buildroot}/usr/share/package-licenses/cockpit/node_modules_json-stable-stringify-without-jsonify_LICENSE
+cp node_modules/kubernetes-container-terminal/COPYING %{buildroot}/usr/share/package-licenses/cockpit/node_modules_kubernetes-container-terminal_COPYING
+cp node_modules/kubernetes-topology-graph/COPYING %{buildroot}/usr/share/package-licenses/cockpit/node_modules_kubernetes-topology-graph_COPYING
+cp node_modules/moment/LICENSE %{buildroot}/usr/share/package-licenses/cockpit/node_modules_moment_LICENSE
+cp node_modules/mustache/LICENSE %{buildroot}/usr/share/package-licenses/cockpit/node_modules_mustache_LICENSE
+cp node_modules/patternfly-react/LICENSE %{buildroot}/usr/share/package-licenses/cockpit/node_modules_patternfly-react_LICENSE
+cp node_modules/patternfly/LICENSE.txt %{buildroot}/usr/share/package-licenses/cockpit/node_modules_patternfly_LICENSE.txt
+cp node_modules/promise/LICENSE %{buildroot}/usr/share/package-licenses/cockpit/node_modules_promise_LICENSE
+cp node_modules/prop-types/LICENSE %{buildroot}/usr/share/package-licenses/cockpit/node_modules_prop-types_LICENSE
+cp node_modules/qunitjs/LICENSE.txt %{buildroot}/usr/share/package-licenses/cockpit/node_modules_qunitjs_LICENSE.txt
+cp node_modules/react-bootstrap/LICENSE %{buildroot}/usr/share/package-licenses/cockpit/node_modules_react-bootstrap_LICENSE
+cp node_modules/react-dom/LICENSE %{buildroot}/usr/share/package-licenses/cockpit/node_modules_react-dom_LICENSE
+cp node_modules/react/LICENSE %{buildroot}/usr/share/package-licenses/cockpit/node_modules_react_LICENSE
+cp node_modules/redux-thunk/LICENSE.md %{buildroot}/usr/share/package-licenses/cockpit/node_modules_redux-thunk_LICENSE.md
+cp node_modules/redux/LICENSE.md %{buildroot}/usr/share/package-licenses/cockpit/node_modules_redux_LICENSE.md
+cp node_modules/registry-image-widgets/COPYING %{buildroot}/usr/share/package-licenses/cockpit/node_modules_registry-image-widgets_COPYING
+cp node_modules/term.js-cockpit/LICENSE %{buildroot}/usr/share/package-licenses/cockpit/node_modules_term.js-cockpit_LICENSE
+cp src/bridge/mock-resource/system/cockpit/test-priority/sub/COPYING %{buildroot}/usr/share/package-licenses/cockpit/src_bridge_mock-resource_system_cockpit_test-priority_sub_COPYING
+cp src/bridge/mock-resource/system/cockpit/test/sub/COPYING %{buildroot}/usr/share/package-licenses/cockpit/src_bridge_mock-resource_system_cockpit_test_sub_COPYING
+cp tools/debian/copyright %{buildroot}/usr/share/package-licenses/cockpit/tools_debian_copyright
 %make_install
 %find_lang cockpit
 ## install_append content
@@ -191,19 +215,9 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 %defattr(-,root,root,-)
 /usr/bin/cockpit-bridge
 /usr/bin/remotectl
-/usr/libexec/cockpit-askpass
-/usr/libexec/cockpit-kube-auth
-/usr/libexec/cockpit-kube-launch
-/usr/libexec/cockpit-session
-/usr/libexec/cockpit-ssh
-/usr/libexec/cockpit-stub
-/usr/libexec/cockpit-ws
 
 %files config
 %defattr(-,root,root,-)
-/usr/lib/systemd/system/cockpit-motd.service
-/usr/lib/systemd/system/cockpit.service
-/usr/lib/systemd/system/cockpit.socket
 /usr/lib/tmpfiles.d/cockpit-tempfiles.conf
 
 %files data
@@ -701,120 +715,55 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 
 %files doc
 %defattr(0644,root,root,0755)
-/usr/share/doc/cockpit/OpenSans-Bold-webfont.woff
-/usr/share/doc/cockpit/OpenSans-BoldItalic-webfont.woff
-/usr/share/doc/cockpit/OpenSans-ExtraBold-webfont.woff
-/usr/share/doc/cockpit/OpenSans-ExtraBoldItalic-webfont.woff
-/usr/share/doc/cockpit/OpenSans-Italic-webfont.woff
-/usr/share/doc/cockpit/OpenSans-Light-webfont.woff
-/usr/share/doc/cockpit/OpenSans-LightItalic-webfont.woff
-/usr/share/doc/cockpit/OpenSans-Regular-webfont.woff
-/usr/share/doc/cockpit/OpenSans-Semibold-webfont.woff
-/usr/share/doc/cockpit/OpenSans-SemiboldItalic-webfont.woff
-/usr/share/doc/cockpit/api-base1-patternfly.html
-/usr/share/doc/cockpit/api-base1.html
-/usr/share/doc/cockpit/api-cockpit.html
-/usr/share/doc/cockpit/api-console-html.html
-/usr/share/doc/cockpit/api-docker.html
-/usr/share/doc/cockpit/api-logs-html.html
-/usr/share/doc/cockpit/api-shell-html.html
-/usr/share/doc/cockpit/api-shell.html
-/usr/share/doc/cockpit/api-system.html
-/usr/share/doc/cockpit/api-terminal-html.html
-/usr/share/doc/cockpit/authentication.html
-/usr/share/doc/cockpit/cockpit-bridge.1.html
-/usr/share/doc/cockpit/cockpit-cache.html
-/usr/share/doc/cockpit/cockpit-channels.html
-/usr/share/doc/cockpit/cockpit-dbus.html
-/usr/share/doc/cockpit/cockpit-error.html
-/usr/share/doc/cockpit/cockpit-file.html
-/usr/share/doc/cockpit/cockpit-http.html
-/usr/share/doc/cockpit/cockpit-locale.html
-/usr/share/doc/cockpit/cockpit-location.html
-/usr/share/doc/cockpit/cockpit-login.html
-/usr/share/doc/cockpit/cockpit-manifest.html
-/usr/share/doc/cockpit/cockpit-manual.html
-/usr/share/doc/cockpit/cockpit-metrics.html
-/usr/share/doc/cockpit/cockpit-series-data.html
-/usr/share/doc/cockpit/cockpit-spawn.html
-/usr/share/doc/cockpit/cockpit-util.html
-/usr/share/doc/cockpit/cockpit-ws.8.html
-/usr/share/doc/cockpit/cockpit.conf.5.html
-/usr/share/doc/cockpit/development.html
-/usr/share/doc/cockpit/embedding.html
-/usr/share/doc/cockpit/feature-docker.html
-/usr/share/doc/cockpit/feature-firewall.html
-/usr/share/doc/cockpit/feature-journal.html
-/usr/share/doc/cockpit/feature-kubernetes.html
-/usr/share/doc/cockpit/feature-machines.html
-/usr/share/doc/cockpit/feature-networkmanager.html
-/usr/share/doc/cockpit/feature-ovirtvirtualmachines.html
-/usr/share/doc/cockpit/feature-packagekit.html
-/usr/share/doc/cockpit/feature-pcp.html
-/usr/share/doc/cockpit/feature-realmd.html
-/usr/share/doc/cockpit/feature-selinux.html
-/usr/share/doc/cockpit/feature-sosreport.html
-/usr/share/doc/cockpit/feature-storaged.html
-/usr/share/doc/cockpit/feature-subscription.html
-/usr/share/doc/cockpit/feature-systemd.html
-/usr/share/doc/cockpit/feature-terminal.html
-/usr/share/doc/cockpit/feature-tuned.html
-/usr/share/doc/cockpit/feature-users.html
-/usr/share/doc/cockpit/feature-virtualmachines.html
-/usr/share/doc/cockpit/features.html
-/usr/share/doc/cockpit/gtk-doc.css
-/usr/share/doc/cockpit/guide.html
-/usr/share/doc/cockpit/home.png
-/usr/share/doc/cockpit/https.html
-/usr/share/doc/cockpit/index.html
-/usr/share/doc/cockpit/index.sgml
-/usr/share/doc/cockpit/left.png
-/usr/share/doc/cockpit/listen.html
-/usr/share/doc/cockpit/packages.html
-/usr/share/doc/cockpit/privileges.html
-/usr/share/doc/cockpit/remotectl.8.html
-/usr/share/doc/cockpit/right.png
-/usr/share/doc/cockpit/sso.html
-/usr/share/doc/cockpit/startup.html
-/usr/share/doc/cockpit/style.css
-/usr/share/doc/cockpit/up.png
-/usr/share/doc/cockpit/urls.html
+%doc /usr/share/doc/cockpit/*
 
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/security/pam_ssh_add.so
 
+%files libexec
+%defattr(-,root,root,-)
+/usr/libexec/cockpit-askpass
+/usr/libexec/cockpit-kube-auth
+/usr/libexec/cockpit-kube-launch
+/usr/libexec/cockpit-session
+/usr/libexec/cockpit-ssh
+/usr/libexec/cockpit-stub
+/usr/libexec/cockpit-ws
+
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/doc/cockpit/COPYING
-/usr/share/doc/cockpit/node_modules_angular-bootstrap-npm_LICENSE
-/usr/share/doc/cockpit/node_modules_angular-gettext_LICENSE
-/usr/share/doc/cockpit/node_modules_bootstrap-datepicker_LICENSE
-/usr/share/doc/cockpit/node_modules_bootstrap_LICENSE
-/usr/share/doc/cockpit/node_modules_c3_LICENSE
-/usr/share/doc/cockpit/node_modules_create-react-class_LICENSE.txt
-/usr/share/doc/cockpit/node_modules_d3_LICENSE
-/usr/share/doc/cockpit/node_modules_jquery-flot_LICENSE.txt
-/usr/share/doc/cockpit/node_modules_js-sha1_LICENSE.txt
-/usr/share/doc/cockpit/node_modules_json-stable-stringify-without-jsonify_LICENSE
-/usr/share/doc/cockpit/node_modules_kubernetes-container-terminal_COPYING
-/usr/share/doc/cockpit/node_modules_kubernetes-topology-graph_COPYING
-/usr/share/doc/cockpit/node_modules_moment_LICENSE
-/usr/share/doc/cockpit/node_modules_mustache_LICENSE
-/usr/share/doc/cockpit/node_modules_patternfly-react_LICENSE
-/usr/share/doc/cockpit/node_modules_patternfly_LICENSE.txt
-/usr/share/doc/cockpit/node_modules_promise_LICENSE
-/usr/share/doc/cockpit/node_modules_prop-types_LICENSE
-/usr/share/doc/cockpit/node_modules_qunitjs_LICENSE.txt
-/usr/share/doc/cockpit/node_modules_react-bootstrap_LICENSE
-/usr/share/doc/cockpit/node_modules_react-dom_LICENSE
-/usr/share/doc/cockpit/node_modules_react_LICENSE
-/usr/share/doc/cockpit/node_modules_redux-thunk_LICENSE.md
-/usr/share/doc/cockpit/node_modules_redux_LICENSE.md
-/usr/share/doc/cockpit/node_modules_registry-image-widgets_COPYING
-/usr/share/doc/cockpit/node_modules_term.js-cockpit_LICENSE
-/usr/share/doc/cockpit/src_bridge_mock-resource_system_cockpit_test-priority_sub_COPYING
-/usr/share/doc/cockpit/src_bridge_mock-resource_system_cockpit_test_sub_COPYING
+/usr/share/package-licenses/cockpit/COPYING
+/usr/share/package-licenses/cockpit/COPYING.node
+/usr/share/package-licenses/cockpit/node_modules_angular-bootstrap-npm_LICENSE
+/usr/share/package-licenses/cockpit/node_modules_angular-gettext_LICENSE
+/usr/share/package-licenses/cockpit/node_modules_bootstrap-datepicker_LICENSE
+/usr/share/package-licenses/cockpit/node_modules_bootstrap_LICENSE
+/usr/share/package-licenses/cockpit/node_modules_c3_LICENSE
+/usr/share/package-licenses/cockpit/node_modules_create-react-class_LICENSE.txt
+/usr/share/package-licenses/cockpit/node_modules_d3_LICENSE
+/usr/share/package-licenses/cockpit/node_modules_jquery-flot_LICENSE.txt
+/usr/share/package-licenses/cockpit/node_modules_js-sha1_LICENSE.txt
+/usr/share/package-licenses/cockpit/node_modules_json-stable-stringify-without-jsonify_LICENSE
+/usr/share/package-licenses/cockpit/node_modules_kubernetes-container-terminal_COPYING
+/usr/share/package-licenses/cockpit/node_modules_kubernetes-topology-graph_COPYING
+/usr/share/package-licenses/cockpit/node_modules_moment_LICENSE
+/usr/share/package-licenses/cockpit/node_modules_mustache_LICENSE
+/usr/share/package-licenses/cockpit/node_modules_patternfly-react_LICENSE
+/usr/share/package-licenses/cockpit/node_modules_patternfly_LICENSE.txt
+/usr/share/package-licenses/cockpit/node_modules_promise_LICENSE
+/usr/share/package-licenses/cockpit/node_modules_prop-types_LICENSE
+/usr/share/package-licenses/cockpit/node_modules_qunitjs_LICENSE.txt
+/usr/share/package-licenses/cockpit/node_modules_react-bootstrap_LICENSE
+/usr/share/package-licenses/cockpit/node_modules_react-dom_LICENSE
+/usr/share/package-licenses/cockpit/node_modules_react_LICENSE
+/usr/share/package-licenses/cockpit/node_modules_redux-thunk_LICENSE.md
+/usr/share/package-licenses/cockpit/node_modules_redux_LICENSE.md
+/usr/share/package-licenses/cockpit/node_modules_registry-image-widgets_COPYING
+/usr/share/package-licenses/cockpit/node_modules_term.js-cockpit_LICENSE
+/usr/share/package-licenses/cockpit/src_bridge_mock-resource_system_cockpit_test-priority_sub_COPYING
+/usr/share/package-licenses/cockpit/src_bridge_mock-resource_system_cockpit_test_sub_COPYING
+/usr/share/package-licenses/cockpit/tools_debian_copyright
 
 %files man
 %defattr(0644,root,root,0755)
@@ -824,6 +773,12 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/man/man8/cockpit-ws.8
 /usr/share/man/man8/pam_ssh_add.8
 /usr/share/man/man8/remotectl.8
+
+%files services
+%defattr(-,root,root,-)
+/usr/lib/systemd/system/cockpit-motd.service
+/usr/lib/systemd/system/cockpit.service
+/usr/lib/systemd/system/cockpit.socket
 
 %files locales -f cockpit.lang
 %defattr(-,root,root,-)

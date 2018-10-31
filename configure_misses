@@ -1,7 +1,4 @@
 Configure miss: whether to install to prefix only
-Configure miss: ssh_get_server_publickey in -lssh
-Configure miss: whether SSH_PUBLICKEY_HASH_SHA256 is declared
-Configure miss: whether ssh_get_fingerprint_hash is declared
 Configure miss: whether to build with PCP
 Configure miss: whether /usr/bin/newusers understands --crypt-method
 Configure miss: asan flags
