@@ -4,7 +4,7 @@
 #
 Name     : cockpit
 Version  : 186
-Release  : 36
+Release  : 37
 URL      : https://github.com/cockpit-project/cockpit/releases/download/186/cockpit-186.tar.xz
 Source0  : https://github.com/cockpit-project/cockpit/releases/download/186/cockpit-186.tar.xz
 Summary  : A systemd web based user interface for Linux servers
