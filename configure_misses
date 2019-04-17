@@ -1,5 +1,4 @@
 Configure miss: whether to install to prefix only
-Configure miss: LIBSSH_BROKEN_KBDINT
 Configure miss: whether to build with PCP
 Configure miss: whether /usr/bin/newusers understands --crypt-method
 Configure miss: asan flags
