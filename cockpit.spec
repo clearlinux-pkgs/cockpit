@@ -4,10 +4,10 @@
 #
 Name     : cockpit
 Version  : 197
-Release  : 51
+Release  : 52
 URL      : https://github.com/cockpit-project/cockpit/releases/download/197/cockpit-197.tar.xz
 Source0  : https://github.com/cockpit-project/cockpit/releases/download/197/cockpit-197.tar.xz
-Summary  : A systemd web based user interface for Linux servers
+Summary  : Web Console for Linux servers
 Group    : Development/Tools
 License  : Apache-2.0 BSD-3-Clause GPL-2.0 LGPL-2.1 LGPL-2.1+ MIT
 Requires: cockpit-bin = %{version}-%{release}
@@ -21,6 +21,7 @@ Requires: cockpit-man = %{version}-%{release}
 Requires: cockpit-services = %{version}-%{release}
 Requires: glib-networking
 Requires: polkit
+Requires: sos
 BuildRequires : Linux-PAM-dev
 BuildRequires : docbook-xml
 BuildRequires : e2fsprogs-dev
@@ -39,6 +40,7 @@ BuildRequires : pkgconfig(libsystemd)
 BuildRequires : pkgconfig(polkit-agent-1)
 BuildRequires : pkgconfig(systemd)
 BuildRequires : polkit
+BuildRequires : sos
 BuildRequires : util-linux
 BuildRequires : xmlto
 Patch1: 0001-Update-cockpit-tmpfile-configuration.patch
@@ -153,8 +155,8 @@ services components for the cockpit package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1561601088
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1562794888
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -167,7 +169,7 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1561601088
+export SOURCE_DATE_EPOCH=1562794888
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/cockpit
 cp COPYING %{buildroot}/usr/share/package-licenses/cockpit/COPYING
