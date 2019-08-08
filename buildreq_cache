@@ -1,2 +1,4 @@
-180
+200
+gnutls-dev
 libssh-dev
+pkgconfig(gnutls)
