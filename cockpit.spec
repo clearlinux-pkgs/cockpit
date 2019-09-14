@@ -4,7 +4,7 @@
 #
 Name     : cockpit
 Version  : 202.1
-Release  : 58
+Release  : 59
 URL      : https://github.com/cockpit-project/cockpit/releases/download/202.1/cockpit-202.1.tar.xz
 Source0  : https://github.com/cockpit-project/cockpit/releases/download/202.1/cockpit-202.1.tar.xz
 Summary  : A systemd web based user interface for Linux servers
