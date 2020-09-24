@@ -4,7 +4,7 @@
 #
 Name     : cockpit
 Version  : 228
-Release  : 90
+Release  : 91
 URL      : https://github.com/cockpit-project/cockpit/releases/download/228/cockpit-228.tar.xz
 Source0  : https://github.com/cockpit-project/cockpit/releases/download/228/cockpit-228.tar.xz
 Summary  : Web Console for Linux servers
