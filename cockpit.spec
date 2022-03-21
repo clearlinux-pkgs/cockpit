@@ -4,7 +4,7 @@
 #
 Name     : cockpit
 Version  : 260
-Release  : 126
+Release  : 127
 URL      : https://github.com/cockpit-project/cockpit/releases/download/260/cockpit-260.tar.xz
 Source0  : https://github.com/cockpit-project/cockpit/releases/download/260/cockpit-260.tar.xz
 Summary  : Web Console for Linux servers
