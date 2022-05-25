@@ -1,5 +1,6 @@
 Configure miss: asan flags
 Configure miss: build strict
+Configure miss: whether to build selinux policy, and which
 Configure miss: whether to build with PCP
 Configure miss: whether to build with coverage
 Configure miss: whether to install cockpit-client
