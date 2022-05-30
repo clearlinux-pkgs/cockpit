@@ -11,3 +11,4 @@ libxml2-dev
 libxslt-bin
 util-linux
 xmlto
+pcp-dev

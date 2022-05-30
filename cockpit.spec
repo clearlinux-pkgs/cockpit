@@ -4,7 +4,7 @@
 #
 Name     : cockpit
 Version  : 270
-Release  : 128
+Release  : 129
 URL      : https://github.com/cockpit-project/cockpit/releases/download/270/cockpit-270.tar.xz
 Source0  : https://github.com/cockpit-project/cockpit/releases/download/270/cockpit-270.tar.xz
 Summary  : Web Console for Linux servers
@@ -30,6 +30,7 @@ BuildRequires : intltool
 BuildRequires : krb5-dev
 BuildRequires : libxml2-dev
 BuildRequires : libxslt-bin
+BuildRequires : pcp-dev
 BuildRequires : pkgconfig(gio-2.0)
 BuildRequires : pkgconfig(gio-unix-2.0)
 BuildRequires : pkgconfig(gnutls)
@@ -148,7 +149,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1653503624
+export SOURCE_DATE_EPOCH=1653926237
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -157,11 +158,11 @@ export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
 export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
-%configure --disable-static --disable-pcp
+%configure --disable-static --enable-pcp
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1653503624
+export SOURCE_DATE_EPOCH=1653926237
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/cockpit
 cp %{_builddir}/cockpit-270/COPYING %{buildroot}/usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf
@@ -207,6 +208,7 @@ cp %{_builddir}/cockpit-270/src/bridge/mock-resource/system/cockpit/test/sub/COP
 %make_install
 ## Remove excluded files
 rm -f %{buildroot}*/usr/lib/firewalld/services/cockpit.xml
+rm -f %{buildroot}*/var/lib/pcp/config/pmlogconf/tools/cockpit
 ## install_append content
 rm -fr %{buildroot}/usr/share/cockpit/apps
 rm -fr %{buildroot}/usr/share/cockpit/dump
@@ -640,6 +642,7 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/libexec/cockpit-client
 /usr/libexec/cockpit-client.ui
 /usr/libexec/cockpit-desktop
+/usr/libexec/cockpit-pcp
 /usr/libexec/cockpit-session
 /usr/libexec/cockpit-ssh
 /usr/libexec/cockpit-tls
