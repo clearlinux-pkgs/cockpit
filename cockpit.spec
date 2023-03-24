@@ -4,10 +4,10 @@
 # Using build pattern: configure
 #
 Name     : cockpit
-Version  : 288
-Release  : 153
-URL      : https://github.com/cockpit-project/cockpit/releases/download/288/cockpit-288.tar.xz
-Source0  : https://github.com/cockpit-project/cockpit/releases/download/288/cockpit-288.tar.xz
+Version  : 288.1
+Release  : 154
+URL      : https://github.com/cockpit-project/cockpit/releases/download/288.1/cockpit-288.1.tar.xz
+Source0  : https://github.com/cockpit-project/cockpit/releases/download/288.1/cockpit-288.1.tar.xz
 Summary  : Web Console for Linux servers
 Group    : Development/Tools
 License  : LGPL-2.1 LGPL-2.1+ MIT
@@ -142,8 +142,8 @@ services components for the cockpit package.
 
 
 %prep
-%setup -q -n cockpit-288
-cd %{_builddir}/cockpit-288
+%setup -q -n cockpit-288.1
+cd %{_builddir}/cockpit-288.1
 %patch1 -p1
 %patch2 -p1
 
@@ -152,7 +152,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1679582674
+export SOURCE_DATE_EPOCH=1679669454
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -165,15 +165,17 @@ export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonl
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1679582674
+export SOURCE_DATE_EPOCH=1679669454
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/cockpit
 cp %{_builddir}/cockpit-%{version}/COPYING %{buildroot}/usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
+cp %{_builddir}/cockpit-%{version}/node_modules/chrome-remote-interface/LICENSE %{buildroot}/usr/share/package-licenses/cockpit/4f3e73d4ca35a21603abe08a14c08cdb926562c7 || :
 cp %{_builddir}/cockpit-%{version}/node_modules/commander/LICENSE %{buildroot}/usr/share/package-licenses/cockpit/63513188251d15fcdc716703fbee89be4a3a20e6 || :
 cp %{_builddir}/cockpit-%{version}/node_modules/sizzle/LICENSE.txt %{buildroot}/usr/share/package-licenses/cockpit/aba8f1f7a4b149e9eec362828f7e8d4bedd68378 || :
 cp %{_builddir}/cockpit-%{version}/node_modules/ws/LICENSE %{buildroot}/usr/share/package-licenses/cockpit/5267b8c02607adefda571a85283fcd110ae081ba || :
 cp %{_builddir}/cockpit-%{version}/src/bridge/mock-resource/system/cockpit/test-priority/sub/COPYING %{buildroot}/usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
 cp %{_builddir}/cockpit-%{version}/src/bridge/mock-resource/system/cockpit/test/sub/COPYING %{buildroot}/usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
+cp %{_builddir}/cockpit-%{version}/tools/debian/copyright %{buildroot}/usr/share/package-licenses/cockpit/f339ad199ba33e4a0265fe2ea3c544619d4ad028 || :
 %make_install
 ## Remove excluded files
 rm -f %{buildroot}*/usr/lib/firewalld/services/cockpit.xml
@@ -589,9 +591,11 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf
+/usr/share/package-licenses/cockpit/4f3e73d4ca35a21603abe08a14c08cdb926562c7
 /usr/share/package-licenses/cockpit/5267b8c02607adefda571a85283fcd110ae081ba
 /usr/share/package-licenses/cockpit/63513188251d15fcdc716703fbee89be4a3a20e6
 /usr/share/package-licenses/cockpit/aba8f1f7a4b149e9eec362828f7e8d4bedd68378
+/usr/share/package-licenses/cockpit/f339ad199ba33e4a0265fe2ea3c544619d4ad028
 
 %files man
 %defattr(0644,root,root,0755)
