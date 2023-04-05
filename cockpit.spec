@@ -4,10 +4,10 @@
 # Using build pattern: configure
 #
 Name     : cockpit
-Version  : 288.2
-Release  : 155
-URL      : https://github.com/cockpit-project/cockpit/releases/download/288.2/cockpit-288.2.tar.xz
-Source0  : https://github.com/cockpit-project/cockpit/releases/download/288.2/cockpit-288.2.tar.xz
+Version  : 289
+Release  : 156
+URL      : https://github.com/cockpit-project/cockpit/releases/download/289/cockpit-289.tar.xz
+Source0  : https://github.com/cockpit-project/cockpit/releases/download/289/cockpit-289.tar.xz
 Summary  : Web Console for Linux servers
 Group    : Development/Tools
 License  : LGPL-2.1 LGPL-2.1+ MIT
@@ -143,8 +143,8 @@ services components for the cockpit package.
 
 
 %prep
-%setup -q -n cockpit-288.2
-cd %{_builddir}/cockpit-288.2
+%setup -q -n cockpit-289
+cd %{_builddir}/cockpit-289
 %patch1 -p1
 %patch2 -p1
 
@@ -153,7 +153,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1680046904
+export SOURCE_DATE_EPOCH=1680703867
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -166,7 +166,7 @@ export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonl
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1680046904
+export SOURCE_DATE_EPOCH=1680703867
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/cockpit
 cp %{_builddir}/cockpit-%{version}/COPYING %{buildroot}/usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
@@ -176,6 +176,7 @@ cp %{_builddir}/cockpit-%{version}/node_modules/sizzle/LICENSE.txt %{buildroot}/
 cp %{_builddir}/cockpit-%{version}/node_modules/ws/LICENSE %{buildroot}/usr/share/package-licenses/cockpit/5267b8c02607adefda571a85283fcd110ae081ba || :
 cp %{_builddir}/cockpit-%{version}/src/bridge/mock-resource/system/cockpit/test-priority/sub/COPYING %{buildroot}/usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
 cp %{_builddir}/cockpit-%{version}/src/bridge/mock-resource/system/cockpit/test/sub/COPYING %{buildroot}/usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
+cp %{_builddir}/cockpit-%{version}/tools/debian/copyright %{buildroot}/usr/share/package-licenses/cockpit/a76926f32f9ddfcc789577d17dce7e5da6f2973d || :
 %make_install
 ## Remove excluded files
 rm -f %{buildroot}*/usr/lib/firewalld/services/cockpit.xml
@@ -230,7 +231,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/base1/po.tr.js.gz
 /usr/share/cockpit/base1/po.uk.js.gz
 /usr/share/cockpit/base1/po.zh_CN.js.gz
-/usr/share/cockpit/base1/po.zh_TW.js.gz
 /usr/share/cockpit/branding/arch/apple-touch-icon.png
 /usr/share/cockpit/branding/arch/branding.css
 /usr/share/cockpit/branding/arch/favicon.ico
@@ -295,7 +295,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/kdump/po.tr.js.gz
 /usr/share/cockpit/kdump/po.uk.js.gz
 /usr/share/cockpit/kdump/po.zh_CN.js.gz
-/usr/share/cockpit/kdump/po.zh_TW.js.gz
 /usr/share/cockpit/metrics/index.css.LEGAL.txt
 /usr/share/cockpit/metrics/index.css.gz
 /usr/share/cockpit/metrics/index.html
@@ -322,7 +321,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/metrics/po.tr.js.gz
 /usr/share/cockpit/metrics/po.uk.js.gz
 /usr/share/cockpit/metrics/po.zh_CN.js.gz
-/usr/share/cockpit/metrics/po.zh_TW.js.gz
 /usr/share/cockpit/motd/inactive.motd
 /usr/share/cockpit/motd/update-motd
 /usr/share/cockpit/networkmanager/firewall.css.LEGAL.txt
@@ -356,7 +354,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/networkmanager/po.tr.js.gz
 /usr/share/cockpit/networkmanager/po.uk.js.gz
 /usr/share/cockpit/networkmanager/po.zh_CN.js.gz
-/usr/share/cockpit/networkmanager/po.zh_TW.js.gz
 /usr/share/cockpit/shell/images/bg-plain.jpg
 /usr/share/cockpit/shell/images/cockpit-icon.svg
 /usr/share/cockpit/shell/images/server-error.png
@@ -384,7 +381,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/shell/po.tr.js.gz
 /usr/share/cockpit/shell/po.uk.js.gz
 /usr/share/cockpit/shell/po.zh_CN.js.gz
-/usr/share/cockpit/shell/po.zh_TW.js.gz
 /usr/share/cockpit/shell/shell.css.LEGAL.txt
 /usr/share/cockpit/shell/shell.css.gz
 /usr/share/cockpit/shell/shell.html
@@ -412,7 +408,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/sosreport/po.tr.js.gz
 /usr/share/cockpit/sosreport/po.uk.js.gz
 /usr/share/cockpit/sosreport/po.zh_CN.js.gz
-/usr/share/cockpit/sosreport/po.zh_TW.js.gz
 /usr/share/cockpit/sosreport/sosreport.css.LEGAL.txt
 /usr/share/cockpit/sosreport/sosreport.css.gz
 /usr/share/cockpit/sosreport/sosreport.js.LEGAL.txt
@@ -465,7 +460,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/static/po.tr.js
 /usr/share/cockpit/static/po.uk.js
 /usr/share/cockpit/static/po.zh_CN.js
-/usr/share/cockpit/static/po.zh_TW.js
 /usr/share/cockpit/storaged/images/storage-array.png
 /usr/share/cockpit/storaged/images/storage-disk.png
 /usr/share/cockpit/storaged/index.html
@@ -490,7 +484,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/storaged/po.tr.js.gz
 /usr/share/cockpit/storaged/po.uk.js.gz
 /usr/share/cockpit/storaged/po.zh_CN.js.gz
-/usr/share/cockpit/storaged/po.zh_TW.js.gz
 /usr/share/cockpit/storaged/storaged.css.LEGAL.txt
 /usr/share/cockpit/storaged/storaged.css.gz
 /usr/share/cockpit/storaged/storaged.js.LEGAL.txt
@@ -531,7 +524,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/systemd/po.tr.js.gz
 /usr/share/cockpit/systemd/po.uk.js.gz
 /usr/share/cockpit/systemd/po.zh_CN.js.gz
-/usr/share/cockpit/systemd/po.zh_TW.js.gz
 /usr/share/cockpit/systemd/services.css.LEGAL.txt
 /usr/share/cockpit/systemd/services.css.gz
 /usr/share/cockpit/systemd/services.html
@@ -564,7 +556,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/users/po.tr.js.gz
 /usr/share/cockpit/users/po.uk.js.gz
 /usr/share/cockpit/users/po.zh_CN.js.gz
-/usr/share/cockpit/users/po.zh_TW.js.gz
 /usr/share/cockpit/users/users.css.LEGAL.txt
 /usr/share/cockpit/users/users.css.gz
 /usr/share/cockpit/users/users.js.LEGAL.txt
@@ -610,6 +601,7 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/package-licenses/cockpit/4f3e73d4ca35a21603abe08a14c08cdb926562c7
 /usr/share/package-licenses/cockpit/5267b8c02607adefda571a85283fcd110ae081ba
 /usr/share/package-licenses/cockpit/63513188251d15fcdc716703fbee89be4a3a20e6
+/usr/share/package-licenses/cockpit/a76926f32f9ddfcc789577d17dce7e5da6f2973d
 /usr/share/package-licenses/cockpit/aba8f1f7a4b149e9eec362828f7e8d4bedd68378
 
 %files man
