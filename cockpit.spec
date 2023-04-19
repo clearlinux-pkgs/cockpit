@@ -4,10 +4,10 @@
 # Using build pattern: configure
 #
 Name     : cockpit
-Version  : 289
-Release  : 156
-URL      : https://github.com/cockpit-project/cockpit/releases/download/289/cockpit-289.tar.xz
-Source0  : https://github.com/cockpit-project/cockpit/releases/download/289/cockpit-289.tar.xz
+Version  : 290
+Release  : 157
+URL      : https://github.com/cockpit-project/cockpit/releases/download/290/cockpit-290.tar.xz
+Source0  : https://github.com/cockpit-project/cockpit/releases/download/290/cockpit-290.tar.xz
 Summary  : Web Console for Linux servers
 Group    : Development/Tools
 License  : LGPL-2.1 LGPL-2.1+ MIT
@@ -137,14 +137,15 @@ man components for the cockpit package.
 %package services
 Summary: services components for the cockpit package.
 Group: Systemd services
+Requires: systemd
 
 %description services
 services components for the cockpit package.
 
 
 %prep
-%setup -q -n cockpit-289
-cd %{_builddir}/cockpit-289
+%setup -q -n cockpit-290
+cd %{_builddir}/cockpit-290
 %patch1 -p1
 %patch2 -p1
 
@@ -153,7 +154,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1680703867
+export SOURCE_DATE_EPOCH=1681916256
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -166,7 +167,7 @@ export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonl
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1680703867
+export SOURCE_DATE_EPOCH=1681916256
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/cockpit
 cp %{_builddir}/cockpit-%{version}/COPYING %{buildroot}/usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
@@ -573,7 +574,7 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 
 %files doc
 %defattr(0644,root,root,0755)
-%doc /usr/share/doc/cockpit/*
+/usr/share/doc/cockpit/*
 
 %files lib
 %defattr(-,root,root,-)
