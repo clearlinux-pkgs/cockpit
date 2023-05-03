@@ -4,10 +4,10 @@
 # Using build pattern: configure
 #
 Name     : cockpit
-Version  : 290
-Release  : 157
-URL      : https://github.com/cockpit-project/cockpit/releases/download/290/cockpit-290.tar.xz
-Source0  : https://github.com/cockpit-project/cockpit/releases/download/290/cockpit-290.tar.xz
+Version  : 291
+Release  : 158
+URL      : https://github.com/cockpit-project/cockpit/releases/download/291/cockpit-291.tar.xz
+Source0  : https://github.com/cockpit-project/cockpit/releases/download/291/cockpit-291.tar.xz
 Summary  : Web Console for Linux servers
 Group    : Development/Tools
 License  : LGPL-2.1 LGPL-2.1+ MIT
@@ -144,8 +144,8 @@ services components for the cockpit package.
 
 
 %prep
-%setup -q -n cockpit-290
-cd %{_builddir}/cockpit-290
+%setup -q -n cockpit-291
+cd %{_builddir}/cockpit-291
 %patch1 -p1
 %patch2 -p1
 
@@ -154,20 +154,20 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1681916256
+export SOURCE_DATE_EPOCH=1683133584
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 %configure --disable-static --enable-pcp
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1681916256
+export SOURCE_DATE_EPOCH=1683133584
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/cockpit
 cp %{_builddir}/cockpit-%{version}/COPYING %{buildroot}/usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
