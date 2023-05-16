@@ -4,10 +4,10 @@
 # Using build pattern: configure
 #
 Name     : cockpit
-Version  : 291
-Release  : 158
-URL      : https://github.com/cockpit-project/cockpit/releases/download/291/cockpit-291.tar.xz
-Source0  : https://github.com/cockpit-project/cockpit/releases/download/291/cockpit-291.tar.xz
+Version  : 292
+Release  : 159
+URL      : https://github.com/cockpit-project/cockpit/releases/download/292/cockpit-292.tar.xz
+Source0  : https://github.com/cockpit-project/cockpit/releases/download/292/cockpit-292.tar.xz
 Summary  : Web Console for Linux servers
 Group    : Development/Tools
 License  : LGPL-2.1 LGPL-2.1+ MIT
@@ -144,17 +144,20 @@ services components for the cockpit package.
 
 
 %prep
-%setup -q -n cockpit-291
-cd %{_builddir}/cockpit-291
+%setup -q -n cockpit-292
+cd %{_builddir}/cockpit-292
 %patch1 -p1
 %patch2 -p1
+pushd ..
+cp -a cockpit-292 buildavx2
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1683133584
+export SOURCE_DATE_EPOCH=1684246654
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -166,8 +169,18 @@ export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonl
 %configure --disable-static --enable-pcp
 make  %{?_smp_mflags}
 
+unset PKG_CONFIG_PATH
+pushd ../buildavx2/
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3"
+export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
+%configure --disable-static --enable-pcp
+make  %{?_smp_mflags}
+popd
 %install
-export SOURCE_DATE_EPOCH=1683133584
+export SOURCE_DATE_EPOCH=1684246654
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/cockpit
 cp %{_builddir}/cockpit-%{version}/COPYING %{buildroot}/usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
@@ -178,6 +191,9 @@ cp %{_builddir}/cockpit-%{version}/node_modules/ws/LICENSE %{buildroot}/usr/shar
 cp %{_builddir}/cockpit-%{version}/src/bridge/mock-resource/system/cockpit/test-priority/sub/COPYING %{buildroot}/usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
 cp %{_builddir}/cockpit-%{version}/src/bridge/mock-resource/system/cockpit/test/sub/COPYING %{buildroot}/usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
 cp %{_builddir}/cockpit-%{version}/tools/debian/copyright %{buildroot}/usr/share/package-licenses/cockpit/a76926f32f9ddfcc789577d17dce7e5da6f2973d || :
+pushd ../buildavx2/
+%make_install_v3
+popd
 %make_install
 ## Remove excluded files
 rm -f %{buildroot}*/usr/lib/firewalld/services/cockpit.xml
@@ -195,12 +211,14 @@ rm -fr %{buildroot}/usr/share/cockpit/subscriptions
 rm -fr %{buildroot}/usr/share/cockpit/subscriptions
 install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 ## install_append end
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
 
 %files bin
 %defattr(-,root,root,-)
+/V3/usr/bin/cockpit-bridge
 /usr/bin/cockpit-bridge
 
 %files config
@@ -578,11 +596,21 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 
 %files lib
 %defattr(-,root,root,-)
+/V3/usr/lib64/security/pam_cockpit_cert.so
+/V3/usr/lib64/security/pam_ssh_add.so
 /usr/lib64/security/pam_cockpit_cert.so
 /usr/lib64/security/pam_ssh_add.so
 
 %files libexec
 %defattr(-,root,root,-)
+/V3/usr/libexec/cockpit-askpass
+/V3/usr/libexec/cockpit-certificate-ensure
+/V3/usr/libexec/cockpit-pcp
+/V3/usr/libexec/cockpit-session
+/V3/usr/libexec/cockpit-ssh
+/V3/usr/libexec/cockpit-tls
+/V3/usr/libexec/cockpit-ws
+/V3/usr/libexec/cockpit-wsinstance-factory
 /usr/libexec/cockpit-askpass
 /usr/libexec/cockpit-certificate-ensure
 /usr/libexec/cockpit-certificate-helper
