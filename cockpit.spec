@@ -5,7 +5,7 @@
 #
 Name     : cockpit
 Version  : 292
-Release  : 159
+Release  : 160
 URL      : https://github.com/cockpit-project/cockpit/releases/download/292/cockpit-292.tar.xz
 Source0  : https://github.com/cockpit-project/cockpit/releases/download/292/cockpit-292.tar.xz
 Summary  : Web Console for Linux servers
@@ -157,7 +157,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1684246654
+export SOURCE_DATE_EPOCH=1685491336
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -180,7 +180,7 @@ export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
 make  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1684246654
+export SOURCE_DATE_EPOCH=1685491336
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/cockpit
 cp %{_builddir}/cockpit-%{version}/COPYING %{buildroot}/usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
