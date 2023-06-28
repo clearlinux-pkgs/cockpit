@@ -1,5 +1,5 @@
 PKG_NAME := cockpit
-URL = https://github.com/cockpit-project/cockpit/releases/download/294.1/cockpit-294.1.tar.xz
+URL = https://github.com/cockpit-project/cockpit/releases/download/295/cockpit-295.tar.xz
 ARCHIVES = 
 
 include ../common/Makefile.common
