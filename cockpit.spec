@@ -4,10 +4,10 @@
 # Using build pattern: configure
 #
 Name     : cockpit
-Version  : 296
-Release  : 165
-URL      : https://github.com/cockpit-project/cockpit/releases/download/296/cockpit-296.tar.xz
-Source0  : https://github.com/cockpit-project/cockpit/releases/download/296/cockpit-296.tar.xz
+Version  : 297
+Release  : 166
+URL      : https://github.com/cockpit-project/cockpit/releases/download/297/cockpit-297.tar.xz
+Source0  : https://github.com/cockpit-project/cockpit/releases/download/297/cockpit-297.tar.xz
 Summary  : Web Console for Linux servers
 Group    : Development/Tools
 License  : LGPL-2.1 LGPL-2.1+ MIT
@@ -144,12 +144,12 @@ services components for the cockpit package.
 
 
 %prep
-%setup -q -n cockpit-296
-cd %{_builddir}/cockpit-296
+%setup -q -n cockpit-297
+cd %{_builddir}/cockpit-297
 %patch -P 1 -p1
 %patch -P 2 -p1
 pushd ..
-cp -a cockpit-296 buildavx2
+cp -a cockpit-297 buildavx2
 popd
 
 %build
@@ -157,7 +157,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1689172809
+export SOURCE_DATE_EPOCH=1690383305
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -180,7 +180,7 @@ export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
 make  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1689172809
+export SOURCE_DATE_EPOCH=1690383305
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/cockpit
 cp %{_builddir}/cockpit-%{version}/COPYING %{buildroot}/usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
