@@ -4,10 +4,10 @@
 # Using build pattern: configure
 #
 Name     : cockpit
-Version  : 300.1
-Release  : 170
-URL      : https://github.com/cockpit-project/cockpit/releases/download/300.1/cockpit-300.1.tar.xz
-Source0  : https://github.com/cockpit-project/cockpit/releases/download/300.1/cockpit-300.1.tar.xz
+Version  : 301
+Release  : 171
+URL      : https://github.com/cockpit-project/cockpit/releases/download/301/cockpit-301.tar.xz
+Source0  : https://github.com/cockpit-project/cockpit/releases/download/301/cockpit-301.tar.xz
 Summary  : Web Console for Linux servers
 Group    : Development/Tools
 License  : LGPL-2.1 LGPL-2.1+ MIT
@@ -18,6 +18,8 @@ Requires: cockpit-lib = %{version}-%{release}
 Requires: cockpit-libexec = %{version}-%{release}
 Requires: cockpit-license = %{version}-%{release}
 Requires: cockpit-man = %{version}-%{release}
+Requires: cockpit-python = %{version}-%{release}
+Requires: cockpit-python3 = %{version}-%{release}
 Requires: cockpit-services = %{version}-%{release}
 Requires: glib-networking
 Requires: polkit
@@ -134,6 +136,24 @@ Group: Default
 man components for the cockpit package.
 
 
+%package python
+Summary: python components for the cockpit package.
+Group: Default
+Requires: cockpit-python3 = %{version}-%{release}
+
+%description python
+python components for the cockpit package.
+
+
+%package python3
+Summary: python3 components for the cockpit package.
+Group: Default
+Requires: python3-core
+
+%description python3
+python3 components for the cockpit package.
+
+
 %package services
 Summary: services components for the cockpit package.
 Group: Systemd services
@@ -144,12 +164,12 @@ services components for the cockpit package.
 
 
 %prep
-%setup -q -n cockpit-300.1
-cd %{_builddir}/cockpit-300.1
+%setup -q -n cockpit-301
+cd %{_builddir}/cockpit-301
 %patch -P 1 -p1
 %patch -P 2 -p1
 pushd ..
-cp -a cockpit-300.1 buildavx2
+cp -a cockpit-301 buildavx2
 popd
 
 %build
@@ -157,7 +177,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1694098366
+export SOURCE_DATE_EPOCH=1695219328
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -180,7 +200,7 @@ export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
 make  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1694098366
+export SOURCE_DATE_EPOCH=1695219328
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/cockpit
 cp %{_builddir}/cockpit-%{version}/COPYING %{buildroot}/usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
@@ -218,7 +238,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 
 %files bin
 %defattr(-,root,root,-)
-/V3/usr/bin/cockpit-bridge
 /usr/bin/cockpit-bridge
 
 %files config
@@ -603,7 +622,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 
 %files libexec
 %defattr(-,root,root,-)
-/V3/usr/libexec/cockpit-askpass
 /V3/usr/libexec/cockpit-certificate-ensure
 /V3/usr/libexec/cockpit-pcp
 /V3/usr/libexec/cockpit-session
@@ -612,6 +630,7 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /V3/usr/libexec/cockpit-ws
 /V3/usr/libexec/cockpit-wsinstance-factory
 /usr/libexec/cockpit-askpass
+/usr/libexec/cockpit-beiboot
 /usr/libexec/cockpit-certificate-ensure
 /usr/libexec/cockpit-certificate-helper
 /usr/libexec/cockpit-client
@@ -642,6 +661,13 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/man/man8/cockpit-tls.8
 /usr/share/man/man8/cockpit-ws.8
 /usr/share/man/man8/pam_ssh_add.8
+
+%files python
+%defattr(-,root,root,-)
+
+%files python3
+%defattr(-,root,root,-)
+/usr/lib/python3*/*
 
 %files services
 %defattr(-,root,root,-)
