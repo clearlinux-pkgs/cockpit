@@ -6,10 +6,10 @@
 # autospec commit: f032afc
 #
 Name     : cockpit
-Version  : 302
-Release  : 173
-URL      : https://github.com/cockpit-project/cockpit/releases/download/302/cockpit-302.tar.xz
-Source0  : https://github.com/cockpit-project/cockpit/releases/download/302/cockpit-302.tar.xz
+Version  : 303
+Release  : 174
+URL      : https://github.com/cockpit-project/cockpit/releases/download/303/cockpit-303.tar.xz
+Source0  : https://github.com/cockpit-project/cockpit/releases/download/303/cockpit-303.tar.xz
 Summary  : Web Console for Linux servers
 Group    : Development/Tools
 License  : LGPL-2.1 LGPL-2.1+ MIT
@@ -166,12 +166,12 @@ services components for the cockpit package.
 
 
 %prep
-%setup -q -n cockpit-302
-cd %{_builddir}/cockpit-302
+%setup -q -n cockpit-303
+cd %{_builddir}/cockpit-303
 %patch -P 1 -p1
 %patch -P 2 -p1
 pushd ..
-cp -a cockpit-302 buildavx2
+cp -a cockpit-303 buildavx2
 popd
 
 %build
@@ -179,7 +179,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1697573593
+export SOURCE_DATE_EPOCH=1697638008
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -222,7 +222,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1697573593
+export SOURCE_DATE_EPOCH=1697638008
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/cockpit
 cp %{_builddir}/cockpit-%{version}/COPYING %{buildroot}/usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
@@ -232,7 +232,6 @@ cp %{_builddir}/cockpit-%{version}/node_modules/sizzle/LICENSE.txt %{buildroot}/
 cp %{_builddir}/cockpit-%{version}/node_modules/ws/LICENSE %{buildroot}/usr/share/package-licenses/cockpit/5267b8c02607adefda571a85283fcd110ae081ba || :
 cp %{_builddir}/cockpit-%{version}/src/bridge/mock-resource/system/cockpit/test-priority/sub/COPYING %{buildroot}/usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
 cp %{_builddir}/cockpit-%{version}/src/bridge/mock-resource/system/cockpit/test/sub/COPYING %{buildroot}/usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
-cp %{_builddir}/cockpit-%{version}/tools/debian/copyright %{buildroot}/usr/share/package-licenses/cockpit/66d75918482648c8f6566c4562f853749992bd2b || :
 pushd ../buildavx2/
 %make_install_v3
 popd
@@ -869,7 +868,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/package-licenses/cockpit/4f3e73d4ca35a21603abe08a14c08cdb926562c7
 /usr/share/package-licenses/cockpit/5267b8c02607adefda571a85283fcd110ae081ba
 /usr/share/package-licenses/cockpit/63513188251d15fcdc716703fbee89be4a3a20e6
-/usr/share/package-licenses/cockpit/66d75918482648c8f6566c4562f853749992bd2b
 /usr/share/package-licenses/cockpit/aba8f1f7a4b149e9eec362828f7e8d4bedd68378
 
 %files man
