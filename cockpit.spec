@@ -6,10 +6,10 @@
 # autospec commit: c1050fe
 #
 Name     : cockpit
-Version  : 306
-Release  : 178
-URL      : https://github.com/cockpit-project/cockpit/releases/download/306/cockpit-306.tar.xz
-Source0  : https://github.com/cockpit-project/cockpit/releases/download/306/cockpit-306.tar.xz
+Version  : 307
+Release  : 179
+URL      : https://github.com/cockpit-project/cockpit/releases/download/307/cockpit-307.tar.xz
+Source0  : https://github.com/cockpit-project/cockpit/releases/download/307/cockpit-307.tar.xz
 Summary  : Web Console for Linux servers
 Group    : Development/Tools
 License  : LGPL-2.1 LGPL-2.1+ MIT
@@ -166,12 +166,12 @@ services components for the cockpit package.
 
 
 %prep
-%setup -q -n cockpit-306
-cd %{_builddir}/cockpit-306
+%setup -q -n cockpit-307
+cd %{_builddir}/cockpit-307
 %patch -P 1 -p1
 %patch -P 2 -p1
 pushd ..
-cp -a cockpit-306 buildavx2
+cp -a cockpit-307 buildavx2
 popd
 
 %build
@@ -179,7 +179,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1701944618
+export SOURCE_DATE_EPOCH=1702914450
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -222,7 +222,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1701944618
+export SOURCE_DATE_EPOCH=1702914450
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/cockpit
 cp %{_builddir}/cockpit-%{version}/COPYING %{buildroot}/usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
@@ -659,8 +659,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/static/po.tr.js
 /usr/share/cockpit/static/po.uk.js
 /usr/share/cockpit/static/po.zh_CN.js
-/usr/share/cockpit/storaged/images/storage-array.png
-/usr/share/cockpit/storaged/images/storage-disk.png
 /usr/share/cockpit/storaged/index.html
 /usr/share/cockpit/storaged/manifest.json
 /usr/share/cockpit/storaged/po.cs.js.gz
