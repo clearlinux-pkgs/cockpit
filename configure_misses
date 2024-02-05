@@ -1,14 +1,24 @@
+Configure miss: /usr/bin/gcc-14 option to enable C11 features
+Configure miss: asan flags
 Configure miss: asan flags
 Configure miss: asan flags
 Configure miss: build strict
 Configure miss: build strict
+Configure miss: build strict
+Configure miss: whether to build selinux policy, and which
 Configure miss: whether to build selinux policy, and which
 Configure miss: whether to build selinux policy, and which
 Configure miss: whether to build with coverage
 Configure miss: whether to build with coverage
+Configure miss: whether to build with coverage
+Configure miss: whether to install cockpit-client
 Configure miss: whether to install cockpit-client
 Configure miss: whether to install cockpit-client
 Configure miss: whether to install the old C cockpit-bridge
 Configure miss: whether to install the old C cockpit-bridge
+Configure miss: whether to install the old C cockpit-bridge
 Configure miss: whether to install to prefix only
 Configure miss: whether to install to prefix only
+Configure miss: whether to install to prefix only
+Configure miss: x86_64-clr-linux-gnu-pkg-config
+Configure miss: x86_64-clr-linux-gnu-strip
