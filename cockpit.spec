@@ -7,7 +7,7 @@
 #
 Name     : cockpit
 Version  : 310.2
-Release  : 184
+Release  : 185
 URL      : https://github.com/cockpit-project/cockpit/releases/download/310.2/cockpit-310.2.tar.xz
 Source0  : https://github.com/cockpit-project/cockpit/releases/download/310.2/cockpit-310.2.tar.xz
 Summary  : Web Console for Linux servers
@@ -182,7 +182,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1707403804
+export SOURCE_DATE_EPOCH=1707414174
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -239,7 +239,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1707403804
+export SOURCE_DATE_EPOCH=1707414174
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/cockpit
 cp %{_builddir}/cockpit-%{version}/COPYING %{buildroot}/usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
@@ -861,8 +861,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 %defattr(-,root,root,-)
 /V3/usr/lib64/security/pam_cockpit_cert.so
 /V3/usr/lib64/security/pam_ssh_add.so
-/VA/usr/lib64/security/pam_cockpit_cert.so
-/VA/usr/lib64/security/pam_ssh_add.so
 /usr/lib64/security/pam_cockpit_cert.so
 /usr/lib64/security/pam_ssh_add.so
 
@@ -875,13 +873,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /V3/usr/libexec/cockpit-tls
 /V3/usr/libexec/cockpit-ws
 /V3/usr/libexec/cockpit-wsinstance-factory
-/VA/usr/libexec/cockpit-certificate-ensure
-/VA/usr/libexec/cockpit-pcp
-/VA/usr/libexec/cockpit-session
-/VA/usr/libexec/cockpit-ssh
-/VA/usr/libexec/cockpit-tls
-/VA/usr/libexec/cockpit-ws
-/VA/usr/libexec/cockpit-wsinstance-factory
 /usr/libexec/cockpit-askpass
 /usr/libexec/cockpit-certificate-ensure
 /usr/libexec/cockpit-certificate-helper
