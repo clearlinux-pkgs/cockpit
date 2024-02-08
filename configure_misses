@@ -1,10 +1,10 @@
-Configure miss: /usr/bin/gcc-14 option to enable C11 features
 Configure miss: asan flags
 Configure miss: asan flags
 Configure miss: asan flags
 Configure miss: build strict
 Configure miss: build strict
 Configure miss: build strict
+Configure miss: gcc-14 option to enable C11 features
 Configure miss: whether to build selinux policy, and which
 Configure miss: whether to build selinux policy, and which
 Configure miss: whether to build selinux policy, and which
