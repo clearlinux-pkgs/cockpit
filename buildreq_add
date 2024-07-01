@@ -11,3 +11,4 @@ libxslt-bin
 util-linux
 xmlto
 pcp-dev
+python3-xz-lzma
