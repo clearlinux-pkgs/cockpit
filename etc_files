@@ -1,9 +1,9 @@
-/builddir/build/BUILDROOT/cockpit-314-190.x86_64/etc/:
-/builddir/build/BUILDROOT/cockpit-314-190.x86_64/etc/cockpit/machines.d:
-/builddir/build/BUILDROOT/cockpit-314-190.x86_64/etc/cockpit/ws-certs.d:
-/builddir/build/BUILDROOT/cockpit-314-190.x86_64/etc/cockpit:
-/builddir/build/BUILDROOT/cockpit-314-190.x86_64/etc/issue.d:
-/builddir/build/BUILDROOT/cockpit-314-190.x86_64/etc/motd.d:
+/etc/:
+/etc/cockpit/machines.d:
+/etc/cockpit/ws-certs.d:
+/etc/cockpit:
+/etc/issue.d:
+/etc/motd.d:
 cockpit
 cockpit
 cockpit.issue
