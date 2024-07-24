@@ -8,7 +8,5 @@ Configure miss: whether to build with coverage
 Configure miss: whether to build with coverage
 Configure miss: whether to install cockpit-client
 Configure miss: whether to install cockpit-client
-Configure miss: whether to install the old C cockpit-bridge
-Configure miss: whether to install the old C cockpit-bridge
 Configure miss: whether to install to prefix only
 Configure miss: whether to install to prefix only
