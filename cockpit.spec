@@ -6,10 +6,10 @@
 # autospec commit: f35655a
 #
 Name     : cockpit
-Version  : 323
-Release  : 194
-URL      : https://github.com/cockpit-project/cockpit/releases/download/323/cockpit-323.tar.xz
-Source0  : https://github.com/cockpit-project/cockpit/releases/download/323/cockpit-323.tar.xz
+Version  : 324
+Release  : 195
+URL      : https://github.com/cockpit-project/cockpit/releases/download/324/cockpit-324.tar.xz
+Source0  : https://github.com/cockpit-project/cockpit/releases/download/324/cockpit-324.tar.xz
 Summary  : Web Console for Linux servers
 Group    : Development/Tools
 License  : LGPL-2.1 LGPL-2.1+ MIT
@@ -48,7 +48,6 @@ BuildRequires : pkgconfig(libssh)
 BuildRequires : pkgconfig(libsystemd)
 BuildRequires : pkgconfig(polkit-agent-1)
 BuildRequires : pkgconfig(systemd)
-BuildRequires : pypi(packaging)
 BuildRequires : python3-xz-lzma
 BuildRequires : util-linux
 BuildRequires : xmlto
@@ -167,11 +166,11 @@ services components for the cockpit package.
 
 
 %prep
-%setup -q -n cockpit-323
-cd %{_builddir}/cockpit-323
+%setup -q -n cockpit-324
+cd %{_builddir}/cockpit-324
 %patch -P 1 -p1
 pushd ..
-cp -a cockpit-323 buildavx2
+cp -a cockpit-324 buildavx2
 popd
 
 %build
@@ -179,7 +178,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1724167213
+export SOURCE_DATE_EPOCH=1725548588
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -224,13 +223,14 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1724167213
+export SOURCE_DATE_EPOCH=1725548588
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/cockpit
 cp %{_builddir}/cockpit-%{version}/COPYING %{buildroot}/usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
 cp %{_builddir}/cockpit-%{version}/node_modules/sizzle/LICENSE.txt %{buildroot}/usr/share/package-licenses/cockpit/aba8f1f7a4b149e9eec362828f7e8d4bedd68378 || :
 cp %{_builddir}/cockpit-%{version}/src/bridge/mock-resource/system/cockpit/test-priority/sub/COPYING %{buildroot}/usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
 cp %{_builddir}/cockpit-%{version}/src/bridge/mock-resource/system/cockpit/test/sub/COPYING %{buildroot}/usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
+cp %{_builddir}/cockpit-%{version}/tools/debian/copyright %{buildroot}/usr/share/package-licenses/cockpit/5f73e8fa585c147d579853647233cf18805245e8 || :
 export GOAMD64=v2
 GOAMD64=v3
 pushd ../buildavx2/
@@ -336,12 +336,10 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/branding/fedora/branding.css
 /usr/share/cockpit/branding/fedora/favicon.ico
 /usr/share/cockpit/branding/fedora/logo.png
-/usr/share/cockpit/branding/kubernetes/branding.css
 /usr/share/cockpit/branding/opensuse/branding.css
 /usr/share/cockpit/branding/opensuse/default-1920x1200.jpg
 /usr/share/cockpit/branding/opensuse/favicon.ico
 /usr/share/cockpit/branding/opensuse/square-hicolor.svg
-/usr/share/cockpit/branding/registry/branding.css
 /usr/share/cockpit/branding/rhel/apple-touch-icon.png
 /usr/share/cockpit/branding/rhel/branding.css
 /usr/share/cockpit/branding/rhel/favicon.ico
@@ -885,6 +883,7 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf
+/usr/share/package-licenses/cockpit/5f73e8fa585c147d579853647233cf18805245e8
 /usr/share/package-licenses/cockpit/aba8f1f7a4b149e9eec362828f7e8d4bedd68378
 
 %files man
