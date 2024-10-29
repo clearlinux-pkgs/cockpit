@@ -7,7 +7,7 @@
 #
 Name     : cockpit
 Version  : 327
-Release  : 198
+Release  : 199
 URL      : https://github.com/cockpit-project/cockpit/releases/download/327/cockpit-327.tar.xz
 Source0  : https://github.com/cockpit-project/cockpit/releases/download/327/cockpit-327.tar.xz
 Summary  : Web Console for Linux servers
