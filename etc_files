@@ -8,6 +8,8 @@ cockpit
 cockpit
 cockpit.issue
 issue.d
+issue.d
 machines.d
 motd.d
+motd.d' ']'
 ws-certs.d

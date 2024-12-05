@@ -6,10 +6,10 @@
 # autospec commit: 5424026
 #
 Name     : cockpit
-Version  : 329.1
-Release  : 202
-URL      : https://github.com/cockpit-project/cockpit/releases/download/329.1/cockpit-329.1.tar.xz
-Source0  : https://github.com/cockpit-project/cockpit/releases/download/329.1/cockpit-329.1.tar.xz
+Version  : 330
+Release  : 203
+URL      : https://github.com/cockpit-project/cockpit/releases/download/330/cockpit-330.tar.xz
+Source0  : https://github.com/cockpit-project/cockpit/releases/download/330/cockpit-330.tar.xz
 Summary  : Web Console for Linux servers
 Group    : Development/Tools
 License  : LGPL-2.1 LGPL-2.1+ MIT
@@ -166,11 +166,11 @@ services components for the cockpit package.
 
 
 %prep
-%setup -q -n cockpit-329.1
-cd %{_builddir}/cockpit-329.1
+%setup -q -n cockpit-330
+cd %{_builddir}/cockpit-330
 %patch -P 1 -p1
 pushd ..
-cp -a cockpit-329.1 buildavx2
+cp -a cockpit-330 buildavx2
 popd
 
 %build
@@ -178,7 +178,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1732550542
+export SOURCE_DATE_EPOCH=1733397668
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -223,7 +223,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1732550542
+export SOURCE_DATE_EPOCH=1733397668
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/cockpit
 cp %{_builddir}/cockpit-%{version}/COPYING %{buildroot}/usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
@@ -265,7 +265,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 
 %files config
 %defattr(-,root,root,-)
-/usr/lib/sysusers.d/cockpit-wsinstance.conf
 /usr/lib/tmpfiles.d/cockpit-ws.conf
 
 %files data
@@ -833,6 +832,7 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 %files libexec
 %defattr(-,root,root,-)
 /V3/usr/libexec/cockpit-certificate-ensure
+/V3/usr/libexec/cockpit-session
 /V3/usr/libexec/cockpit-tls
 /V3/usr/libexec/cockpit-ws
 /V3/usr/libexec/cockpit-wsinstance-factory
@@ -873,15 +873,16 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 %files services
 %defattr(-,root,root,-)
 /usr/lib/systemd/system/cockpit-motd.service
+/usr/lib/systemd/system/cockpit-session-socket-user.service
 /usr/lib/systemd/system/cockpit-session.socket
 /usr/lib/systemd/system/cockpit-session@.service
-/usr/lib/systemd/system/cockpit-ws-user.service
 /usr/lib/systemd/system/cockpit-wsinstance-http.service
 /usr/lib/systemd/system/cockpit-wsinstance-http.socket
 /usr/lib/systemd/system/cockpit-wsinstance-https-factory.socket
 /usr/lib/systemd/system/cockpit-wsinstance-https-factory@.service
 /usr/lib/systemd/system/cockpit-wsinstance-https@.service
 /usr/lib/systemd/system/cockpit-wsinstance-https@.socket
+/usr/lib/systemd/system/cockpit-wsinstance-socket-user.service
 /usr/lib/systemd/system/cockpit.service
 /usr/lib/systemd/system/cockpit.socket
 /usr/lib/systemd/system/system-cockpithttps.slice
