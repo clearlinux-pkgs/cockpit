@@ -6,10 +6,10 @@
 # autospec commit: 5424026
 #
 Name     : cockpit
-Version  : 330
-Release  : 203
-URL      : https://github.com/cockpit-project/cockpit/releases/download/330/cockpit-330.tar.xz
-Source0  : https://github.com/cockpit-project/cockpit/releases/download/330/cockpit-330.tar.xz
+Version  : 331
+Release  : 204
+URL      : https://github.com/cockpit-project/cockpit/releases/download/331/cockpit-331.tar.xz
+Source0  : https://github.com/cockpit-project/cockpit/releases/download/331/cockpit-331.tar.xz
 Summary  : Web Console for Linux servers
 Group    : Development/Tools
 License  : LGPL-2.1 LGPL-2.1+ MIT
@@ -166,11 +166,11 @@ services components for the cockpit package.
 
 
 %prep
-%setup -q -n cockpit-330
-cd %{_builddir}/cockpit-330
+%setup -q -n cockpit-331
+cd %{_builddir}/cockpit-331
 %patch -P 1 -p1
 pushd ..
-cp -a cockpit-330 buildavx2
+cp -a cockpit-331 buildavx2
 popd
 
 %build
@@ -178,7 +178,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1733397668
+export SOURCE_DATE_EPOCH=1735075954
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -223,7 +223,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1733397668
+export SOURCE_DATE_EPOCH=1735075954
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/cockpit
 cp %{_builddir}/cockpit-%{version}/COPYING %{buildroot}/usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
@@ -349,6 +349,8 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/branding/ubuntu/branding.css
 /usr/share/cockpit/branding/ubuntu/favicon.ico
 /usr/share/cockpit/branding/ubuntu/logo.png
+/usr/share/cockpit/issue/inactive.issue
+/usr/share/cockpit/issue/update-issue
 /usr/share/cockpit/kdump/index.html
 /usr/share/cockpit/kdump/kdump.css.gz
 /usr/share/cockpit/kdump/kdump.js.gz
@@ -441,8 +443,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/metrics/po.uk.js.gz
 /usr/share/cockpit/metrics/po.zh_CN.js.gz
 /usr/share/cockpit/metrics/po.zh_TW.js.gz
-/usr/share/cockpit/motd/inactive.motd
-/usr/share/cockpit/motd/update-motd
 /usr/share/cockpit/networkmanager/firewall.css.gz
 /usr/share/cockpit/networkmanager/firewall.html
 /usr/share/cockpit/networkmanager/firewall.js.gz
@@ -872,7 +872,7 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 
 %files services
 %defattr(-,root,root,-)
-/usr/lib/systemd/system/cockpit-motd.service
+/usr/lib/systemd/system/cockpit-issue.service
 /usr/lib/systemd/system/cockpit-session-socket-user.service
 /usr/lib/systemd/system/cockpit-session.socket
 /usr/lib/systemd/system/cockpit-session@.service
