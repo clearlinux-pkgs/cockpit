@@ -7,7 +7,7 @@
 #
 Name     : cockpit
 Version  : 336.2
-Release  : 211
+Release  : 212
 URL      : https://github.com/cockpit-project/cockpit/releases/download/336.2/cockpit-336.2.tar.xz
 Source0  : https://github.com/cockpit-project/cockpit/releases/download/336.2/cockpit-336.2.tar.xz
 Summary  : Web Console for Linux servers
