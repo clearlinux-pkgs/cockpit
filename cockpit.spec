@@ -6,10 +6,10 @@
 # autospec commit: 9594167
 #
 Name     : cockpit
-Version  : 337
-Release  : 213
-URL      : https://github.com/cockpit-project/cockpit/releases/download/337/cockpit-337.tar.xz
-Source0  : https://github.com/cockpit-project/cockpit/releases/download/337/cockpit-337.tar.xz
+Version  : 338
+Release  : 214
+URL      : https://github.com/cockpit-project/cockpit/releases/download/338/cockpit-338.tar.xz
+Source0  : https://github.com/cockpit-project/cockpit/releases/download/338/cockpit-338.tar.xz
 Summary  : Web Console for Linux servers
 Group    : Development/Tools
 License  : LGPL-2.1 LGPL-2.1+ MIT
@@ -166,11 +166,11 @@ services components for the cockpit package.
 
 
 %prep
-%setup -q -n cockpit-337
-cd %{_builddir}/cockpit-337
+%setup -q -n cockpit-338
+cd %{_builddir}/cockpit-338
 %patch -P 1 -p1
 pushd ..
-cp -a cockpit-337 buildavx2
+cp -a cockpit-338 buildavx2
 popd
 
 %build
@@ -178,7 +178,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1745417828
+export SOURCE_DATE_EPOCH=1746627303
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -223,7 +223,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1745417828
+export SOURCE_DATE_EPOCH=1746627303
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/cockpit
 cp %{_builddir}/cockpit-%{version}/COPYING %{buildroot}/usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
@@ -291,7 +291,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/base1/po.manifest.ja.js.gz
 /usr/share/cockpit/base1/po.manifest.ka.js.gz
 /usr/share/cockpit/base1/po.manifest.ko.js.gz
-/usr/share/cockpit/base1/po.manifest.nb_NO.js.gz
 /usr/share/cockpit/base1/po.manifest.nl.js.gz
 /usr/share/cockpit/base1/po.manifest.pl.js.gz
 /usr/share/cockpit/base1/po.manifest.pt_BR.js.gz
@@ -302,7 +301,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/base1/po.manifest.uk.js.gz
 /usr/share/cockpit/base1/po.manifest.zh_CN.js.gz
 /usr/share/cockpit/base1/po.manifest.zh_TW.js.gz
-/usr/share/cockpit/base1/po.nb_NO.js.gz
 /usr/share/cockpit/base1/po.nl.js.gz
 /usr/share/cockpit/base1/po.pl.js.gz
 /usr/share/cockpit/base1/po.pt_BR.js.gz
@@ -370,7 +368,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/kdump/po.manifest.ja.js.gz
 /usr/share/cockpit/kdump/po.manifest.ka.js.gz
 /usr/share/cockpit/kdump/po.manifest.ko.js.gz
-/usr/share/cockpit/kdump/po.manifest.nb_NO.js.gz
 /usr/share/cockpit/kdump/po.manifest.nl.js.gz
 /usr/share/cockpit/kdump/po.manifest.pl.js.gz
 /usr/share/cockpit/kdump/po.manifest.pt_BR.js.gz
@@ -381,7 +378,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/kdump/po.manifest.uk.js.gz
 /usr/share/cockpit/kdump/po.manifest.zh_CN.js.gz
 /usr/share/cockpit/kdump/po.manifest.zh_TW.js.gz
-/usr/share/cockpit/kdump/po.nb_NO.js.gz
 /usr/share/cockpit/kdump/po.nl.js.gz
 /usr/share/cockpit/kdump/po.pl.js.gz
 /usr/share/cockpit/kdump/po.pt_BR.js.gz
@@ -416,7 +412,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/metrics/po.manifest.ja.js.gz
 /usr/share/cockpit/metrics/po.manifest.ka.js.gz
 /usr/share/cockpit/metrics/po.manifest.ko.js.gz
-/usr/share/cockpit/metrics/po.manifest.nb_NO.js.gz
 /usr/share/cockpit/metrics/po.manifest.nl.js.gz
 /usr/share/cockpit/metrics/po.manifest.pl.js.gz
 /usr/share/cockpit/metrics/po.manifest.pt_BR.js.gz
@@ -427,7 +422,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/metrics/po.manifest.uk.js.gz
 /usr/share/cockpit/metrics/po.manifest.zh_CN.js.gz
 /usr/share/cockpit/metrics/po.manifest.zh_TW.js.gz
-/usr/share/cockpit/metrics/po.nb_NO.js.gz
 /usr/share/cockpit/metrics/po.nl.js.gz
 /usr/share/cockpit/metrics/po.pl.js.gz
 /usr/share/cockpit/metrics/po.pt_BR.js.gz
@@ -465,7 +459,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/networkmanager/po.manifest.ja.js.gz
 /usr/share/cockpit/networkmanager/po.manifest.ka.js.gz
 /usr/share/cockpit/networkmanager/po.manifest.ko.js.gz
-/usr/share/cockpit/networkmanager/po.manifest.nb_NO.js.gz
 /usr/share/cockpit/networkmanager/po.manifest.nl.js.gz
 /usr/share/cockpit/networkmanager/po.manifest.pl.js.gz
 /usr/share/cockpit/networkmanager/po.manifest.pt_BR.js.gz
@@ -476,7 +469,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/networkmanager/po.manifest.uk.js.gz
 /usr/share/cockpit/networkmanager/po.manifest.zh_CN.js.gz
 /usr/share/cockpit/networkmanager/po.manifest.zh_TW.js.gz
-/usr/share/cockpit/networkmanager/po.nb_NO.js.gz
 /usr/share/cockpit/networkmanager/po.nl.js.gz
 /usr/share/cockpit/networkmanager/po.pl.js.gz
 /usr/share/cockpit/networkmanager/po.pt_BR.js.gz
@@ -515,7 +507,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/shell/po.manifest.ja.js.gz
 /usr/share/cockpit/shell/po.manifest.ka.js.gz
 /usr/share/cockpit/shell/po.manifest.ko.js.gz
-/usr/share/cockpit/shell/po.manifest.nb_NO.js.gz
 /usr/share/cockpit/shell/po.manifest.nl.js.gz
 /usr/share/cockpit/shell/po.manifest.pl.js.gz
 /usr/share/cockpit/shell/po.manifest.pt_BR.js.gz
@@ -526,7 +517,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/shell/po.manifest.uk.js.gz
 /usr/share/cockpit/shell/po.manifest.zh_CN.js.gz
 /usr/share/cockpit/shell/po.manifest.zh_TW.js.gz
-/usr/share/cockpit/shell/po.nb_NO.js.gz
 /usr/share/cockpit/shell/po.nl.js.gz
 /usr/share/cockpit/shell/po.pl.js.gz
 /usr/share/cockpit/shell/po.pt_BR.js.gz
@@ -562,7 +552,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/sosreport/po.manifest.ja.js.gz
 /usr/share/cockpit/sosreport/po.manifest.ka.js.gz
 /usr/share/cockpit/sosreport/po.manifest.ko.js.gz
-/usr/share/cockpit/sosreport/po.manifest.nb_NO.js.gz
 /usr/share/cockpit/sosreport/po.manifest.nl.js.gz
 /usr/share/cockpit/sosreport/po.manifest.pl.js.gz
 /usr/share/cockpit/sosreport/po.manifest.pt_BR.js.gz
@@ -573,7 +562,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/sosreport/po.manifest.uk.js.gz
 /usr/share/cockpit/sosreport/po.manifest.zh_CN.js.gz
 /usr/share/cockpit/sosreport/po.manifest.zh_TW.js.gz
-/usr/share/cockpit/sosreport/po.nb_NO.js.gz
 /usr/share/cockpit/sosreport/po.nl.js.gz
 /usr/share/cockpit/sosreport/po.pl.js.gz
 /usr/share/cockpit/sosreport/po.pt_BR.js.gz
@@ -637,7 +625,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/static/po.manifest.ja.js
 /usr/share/cockpit/static/po.manifest.ka.js
 /usr/share/cockpit/static/po.manifest.ko.js
-/usr/share/cockpit/static/po.manifest.nb_NO.js
 /usr/share/cockpit/static/po.manifest.nl.js
 /usr/share/cockpit/static/po.manifest.pl.js
 /usr/share/cockpit/static/po.manifest.pt_BR.js
@@ -648,7 +635,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/static/po.manifest.uk.js
 /usr/share/cockpit/static/po.manifest.zh_CN.js
 /usr/share/cockpit/static/po.manifest.zh_TW.js
-/usr/share/cockpit/static/po.nb_NO.js
 /usr/share/cockpit/static/po.nl.js
 /usr/share/cockpit/static/po.pl.js
 /usr/share/cockpit/static/po.pt_BR.js
@@ -681,7 +667,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/storaged/po.manifest.ja.js.gz
 /usr/share/cockpit/storaged/po.manifest.ka.js.gz
 /usr/share/cockpit/storaged/po.manifest.ko.js.gz
-/usr/share/cockpit/storaged/po.manifest.nb_NO.js.gz
 /usr/share/cockpit/storaged/po.manifest.nl.js.gz
 /usr/share/cockpit/storaged/po.manifest.pl.js.gz
 /usr/share/cockpit/storaged/po.manifest.pt_BR.js.gz
@@ -692,7 +677,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/storaged/po.manifest.uk.js.gz
 /usr/share/cockpit/storaged/po.manifest.zh_CN.js.gz
 /usr/share/cockpit/storaged/po.manifest.zh_TW.js.gz
-/usr/share/cockpit/storaged/po.nb_NO.js.gz
 /usr/share/cockpit/storaged/po.nl.js.gz
 /usr/share/cockpit/storaged/po.pl.js.gz
 /usr/share/cockpit/storaged/po.pt_BR.js.gz
@@ -735,7 +719,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/systemd/po.manifest.ja.js.gz
 /usr/share/cockpit/systemd/po.manifest.ka.js.gz
 /usr/share/cockpit/systemd/po.manifest.ko.js.gz
-/usr/share/cockpit/systemd/po.manifest.nb_NO.js.gz
 /usr/share/cockpit/systemd/po.manifest.nl.js.gz
 /usr/share/cockpit/systemd/po.manifest.pl.js.gz
 /usr/share/cockpit/systemd/po.manifest.pt_BR.js.gz
@@ -746,7 +729,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/systemd/po.manifest.uk.js.gz
 /usr/share/cockpit/systemd/po.manifest.zh_CN.js.gz
 /usr/share/cockpit/systemd/po.manifest.zh_TW.js.gz
-/usr/share/cockpit/systemd/po.nb_NO.js.gz
 /usr/share/cockpit/systemd/po.nl.js.gz
 /usr/share/cockpit/systemd/po.pl.js.gz
 /usr/share/cockpit/systemd/po.pt_BR.js.gz
@@ -785,7 +767,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/users/po.manifest.ja.js.gz
 /usr/share/cockpit/users/po.manifest.ka.js.gz
 /usr/share/cockpit/users/po.manifest.ko.js.gz
-/usr/share/cockpit/users/po.manifest.nb_NO.js.gz
 /usr/share/cockpit/users/po.manifest.nl.js.gz
 /usr/share/cockpit/users/po.manifest.pl.js.gz
 /usr/share/cockpit/users/po.manifest.pt_BR.js.gz
@@ -796,7 +777,6 @@ install -m 0644 -D tools/cockpit.clear.pam %{buildroot}/usr/share/pam.d/cockpit
 /usr/share/cockpit/users/po.manifest.uk.js.gz
 /usr/share/cockpit/users/po.manifest.zh_CN.js.gz
 /usr/share/cockpit/users/po.manifest.zh_TW.js.gz
-/usr/share/cockpit/users/po.nb_NO.js.gz
 /usr/share/cockpit/users/po.nl.js.gz
 /usr/share/cockpit/users/po.pl.js.gz
 /usr/share/cockpit/users/po.pt_BR.js.gz
