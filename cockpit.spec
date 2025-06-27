@@ -6,10 +6,10 @@
 # autospec commit: 65cf152
 #
 Name     : cockpit
-Version  : 341
-Release  : 217
-URL      : https://github.com/cockpit-project/cockpit/releases/download/341/cockpit-341.tar.xz
-Source0  : https://github.com/cockpit-project/cockpit/releases/download/341/cockpit-341.tar.xz
+Version  : 341.1
+Release  : 218
+URL      : https://github.com/cockpit-project/cockpit/releases/download/341.1/cockpit-341.1.tar.xz
+Source0  : https://github.com/cockpit-project/cockpit/releases/download/341.1/cockpit-341.1.tar.xz
 Summary  : Web Console for Linux servers
 Group    : Development/Tools
 License  : LGPL-2.1 LGPL-2.1+ MIT
@@ -166,11 +166,11 @@ services components for the cockpit package.
 
 
 %prep
-%setup -q -n cockpit-341
-cd %{_builddir}/cockpit-341
+%setup -q -n cockpit-341.1
+cd %{_builddir}/cockpit-341.1
 %patch -P 1 -p1
 pushd ..
-cp -a cockpit-341 buildavx2
+cp -a cockpit-341.1 buildavx2
 popd
 
 %build
@@ -178,7 +178,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1750862387
+export SOURCE_DATE_EPOCH=1751035364
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -223,7 +223,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1750862387
+export SOURCE_DATE_EPOCH=1751035364
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/cockpit
 cp %{_builddir}/cockpit-%{version}/COPYING %{buildroot}/usr/share/package-licenses/cockpit/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
